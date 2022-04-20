@@ -1,0 +1,31 @@
+<h2>Login</h2>
+{{#if error}}
+    <div class="Error"> ERROR: {{error}}</div>
+{{/if}}
+<form method="POST" action="/homepage" id="login-form">
+		<label id="email_label" for="email">
+			Email:
+			<input name="email"  id="email"/>
+		</label>
+
+        <label id="password_label" for="password">
+			Password:
+			<input name="password" type="password" id="password"/>
+		</label>
+
+		<button type="submit">Submit</button>
+	</form>
+    <a href="/signUp">Need to register? Click here to sign-up</a>
+
+<h3>Welcome to JavaReads Cafe!</h3>
+<p class = "homepage_intro">
+	Welcome to JavaReads-Cafe, a Hoboken located coffee-shop where users can purchase various types of coffee, pastries, and smoothies. Before ordering, users have the option of reserving seats in the restaurant for a block of time. Users can also  like or dislike, and write reviews for products being offered at the cafe. 
+ 
+</p>
+<p class = "homepage_intro">On top of selling coffee to customers, JavaReads-Cafe has the unique twist of hosting a reading community, where users can browse through the cafe's book catalog online and read them at the cafe. Just like the food/drinks, users can write reviews of books that are part of the cafe's book catalog on the website.
+JavaReads-Cafe's web application will deliver a platform that allows for quick and easy purchases, while at the same time bringing together readers within the Hoboken community. Customers can walk in or out, or stay and enjoy seating within the cafe, making JavaReads-Cafe a place for every type of coffee enthusiast.</p>
+
+<div class = "homepage_pics">
+	<img src = "../../public/images/bookCafe.jpeg" alt = "cafeBooks" width = "250" height = "250">
+	<img src = "../../public/images/cafe.jpeg" alt = "cafe" width = "250" height = "250">
+</div>

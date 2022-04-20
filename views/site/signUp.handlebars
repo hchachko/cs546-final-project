@@ -1,0 +1,28 @@
+<h2>Sign Up</h2>
+
+{{#if error}}
+    <div class="Error"> ERROR: {{error}}</div>
+{{/if}}
+<form method="POST" action="/signup" id="signup-form">
+		<label id="firstName_label" for="firstName">
+			First Name:
+			<input name="firstName"  id="firstName"/>
+		</label>
+
+        <label id="lastName_label" for="lastName">
+			Last Name:
+			<input name="lastName" type="text" id="lastName"/>
+		</label>
+
+		<label id="email_label" for="email">
+			Email:
+			<input name="email" type="text" id="email"/>
+		</label>
+
+		<label id="password_label" for="password">
+			Password:
+			<input name="password" type="password" id="password"/>
+		</label>
+
+		<button type="submit">Submit</button>
+	</form>
