@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const saltRounds = 8;
 
 module.exports = {
-  createUser: async (firstName, lastName, email, password) => {
+  createUser: async (firstName, lastName, email, password, employee) => {
     if (
       firstName == undefined ||
       lastName == undefined ||
@@ -99,6 +99,7 @@ module.exports = {
       lastName: lastName,
       email: email_lowercase,
       password: hash,
+      employee: employee,
       favoriteItems: [],
     };
     const insertInfo = await userCollection.insertOne(newUser);
@@ -139,6 +140,7 @@ module.exports = {
         authenticated: true,
         firstName: findUser.firstName,
         lastName: findUser.lastName,
+        employee: findUser.employee,
       };
     }
   },

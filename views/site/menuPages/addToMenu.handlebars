@@ -1,0 +1,25 @@
+{{#if success}}
+<div class="Success"> {{success}} </div>
+{{/if}}
+{{#if error}}
+<div class="Error"> ERROR: {{error}}</div>
+{{/if}}
+
+<form method="POST" action="/menu/addToMenu" id="addToMenuForm">
+	<label id = "itemName_label" for="itemName">
+        Item Name:
+        <input name="itemName" type="text" id="itemName"/>
+    </label>
+    <label id = "price_label" for="price">
+        Price:
+        <input name="price" type="text" id="price"/>
+    </label>
+    <label id = "category_label" for="category">
+        Category:
+        <input name="category" type="text" id="category"/>
+    </label>
+
+	<button type="submit">Submit</button>
+</form>
+
+<a href="/employeeProfile">Back to Employee Profile</a>

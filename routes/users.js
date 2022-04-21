@@ -27,6 +27,7 @@ router.post("/signup", async (req, res) => {
     const lastName = request.lastName;
     const email = request.email;
     const password = request.password;
+    const employee = request.employee;
 
     if (
       firstName == undefined ||
@@ -111,7 +112,8 @@ router.post("/signup", async (req, res) => {
       firstName,
       lastName,
       email,
-      password
+      password,
+      employee
     );
     if (createUser.userInserted == true) {
       res.redirect("/");
@@ -151,13 +153,20 @@ router.post("/homepage", async (req, res) => {
     if (checkUser.authenticated == true) {
       const firstName = checkUser.firstName;
       const lastName = checkUser.lastName;
+      const employee = checkUser.employee;
       console.log(req.session);
       req.session.user = {
         firstName: firstName,
         lastName: lastName,
         email: email,
+        employee: employee,
       };
-      res.redirect("/userProfile");
+      if (req.session.user.employee == "on") {
+        res.redirect("/employeeProfile");
+      }
+      if (req.session.user.employee == undefined) {
+        res.redirect("/userProfile");
+      }
     } else {
       res.status(400).render("site/homepage", { error: e });
     }
@@ -173,6 +182,20 @@ router.get("/userProfile", (req, res) => {
       firstName: req.session.user.firstName,
       lastName: req.session.user.lastName,
       email: req.session.user.email,
+      employee: req.session.user.employee,
+    });
+  } else {
+    res.redirect("/");
+  }
+});
+
+router.get("/employeeProfile", (req, res) => {
+  if (req.session.user) {
+    res.render("site/employeeProfile", {
+      firstName: req.session.user.firstName,
+      lastName: req.session.user.lastName,
+      email: req.session.user.email,
+      employee: req.session.user.employee,
     });
   } else {
     res.redirect("/");
