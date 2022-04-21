@@ -2,7 +2,7 @@ const MongoClient = require("mongodb").MongoClient;
 const settings = {
   mongoConfig: {
     //for matt: mongodb://127.0.0.1/
-    serverUrl: "mongodb://localhost:27017/",
+    serverUrl: "mongodb://127.0.0.1/",
     database: "JavaReadsCafe",
   },
 };

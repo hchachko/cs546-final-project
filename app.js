@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 const app = express();
 const static = express.static(__dirname + "/public");
 
@@ -29,6 +30,7 @@ app.use("/private", (req, res, next) => {
     next();
   }
 });
+
 // app.use(async (req, res, next) => {
 //   let timestamp = new Date().toUTCString();
 //   let requestMethod = req.method;
