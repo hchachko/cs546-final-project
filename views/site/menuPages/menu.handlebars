@@ -1,0 +1,10 @@
+<h2>Hello {{firstName}}! </h1>
+<a href = "/userProfile">Back to userpage</a>
+<h1>Menu:</h1>
+{{#each menu}}
+    <a class="menuItem" href="/menu/{{this._id}}">
+        <img alt = "{{this.itemName}}" src = "{{this.image}}">
+        <h3>{{this.itemName}}</h3>
+        <p>{{this.price}}</p>
+    </a>
+{{/each}}

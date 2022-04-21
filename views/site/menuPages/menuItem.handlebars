@@ -1,0 +1,12 @@
+<!-- Still a work in progress (Harrison) -->
+<a href="/menu">Back to Menu</a>
+<h2>{{menuItem.itemName}}</h2>
+<h3>{{menuItem.price}}</h3>
+<img alt = "{{menuItem.itemName}}" src = "{{menuItem.image}}">
+<p>Reviews:</p>
+{{#if menuItem.reviews}}
+    <!-- TODO -->
+{{else}}
+    <p>None yet!</p>
+{{/if}}
+<a href="/menu/{{menuItem._id}}/review">Would you like to write a review?</a>
