@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const userData = require("../data/users");
+const menuData = require("../data/menu");
 
 router.get("/", (req, res) => {
   if (req.session.user) {
