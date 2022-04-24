@@ -3,6 +3,7 @@ const router = express.Router();
 const menuData = require("../data/menu");
 const path = require("path");
 let { ObjectId } = require("mongodb");
+const { IncomingMessage } = require("http");
 
 router.get("/", async (req, res) => {
   if (req.session.user) {
@@ -48,32 +49,37 @@ router.post("/addToMenu", async (req, res) => {
       const itemName = req.body.itemName;
       const price = req.body.price;
       const category = req.body.category;
+      const image = req.body.image;
       if (
         itemName == undefined ||
         price == undefined ||
-        category == undefined
+        category == undefined ||
+        image == undefined
       ) {
-        throw "itemName, price, and category must be provided";
+        throw "itemName, price, category, and image must be provided";
       }
       if (
         typeof itemName != "string" ||
         typeof price != "string" ||
-        typeof category != "string"
+        typeof category != "string" ||
+        typeof image != "string"
       ) {
-        throw "itemName/price/category must be a valid string";
+        throw "itemName/price/category/image must be a valid string";
       }
       if (
         itemName.trim().length == 0 ||
         price.trim().length == 0 ||
-        category.trim().length == 0
+        category.trim().length == 0 ||
+        image.trim().length == 0
       ) {
-        throw "itemName must not be empty";
+        throw "Input(s) must not be empty";
       }
 
       const addedMenuItem = await menuData.createItem(
         itemName,
         price,
-        category
+        category, 
+        image
       );
       res.render("site/menuPages/addToMenu", {
         success: "Item added to menu Successfully.",
