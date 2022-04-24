@@ -24,4 +24,5 @@ module.exports = {
   favoriteBooksOrDrinks: getCollectionFn("favoriteBooksOrDrinks"),
   bookReviews: getCollectionFn("bookReviews"),
   comments: getCollectionFn("comments"),
+  seats: getCollectionFn("seats"),
 };

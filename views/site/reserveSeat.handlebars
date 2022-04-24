@@ -1,0 +1,21 @@
+{{#if success}}
+<div class="Success"> {{success}} </div>
+{{/if}}
+{{#if error}}
+<div class="Error"> ERROR: {{error}}</div>
+{{/if}}
+
+<form method="POST" action="/seats/reserveSeat" id="reserveSeat">
+    <label id="itemName_label" for="itemName">
+        Choose the day:
+        <input name="numSeats" type="text" id="numSeats" />
+    </label>
+    <label id="itemName_label" for="itemName">
+        Choose the hour:
+        <input name="numSeats" type="text" id="numSeats" />
+    </label>
+
+    <button type="submit">Submit</button>
+</form>
+
+<a href="/orderDrink">Go to order drink page</a>
