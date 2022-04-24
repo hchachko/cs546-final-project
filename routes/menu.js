@@ -122,4 +122,29 @@ router.get("/:id/review", async (req, res) => {
   }
 });
 
+router.post("/:id/review", async (req, res) => {
+  if (req.session.user) {
+    let menuItem;
+    try {
+      if (!req.params.id) throw "id needed";
+      if (!ObjectId.isValid(req.params.id)) throw "id is not a valid Object ID";
+      menuItem = await menuData.get(req.params.id);
+    } catch (e) {
+      res.status(400).render("site/error", {error: e});
+      return;
+    }
+    try {
+      const reviewLikeDislike = req.body.reviewLikeDislike;
+      const reviewDesc = req.body.reviewDesc;
+      if (!reviewLikeDislike || !reviewDesc) throw "You must like/dislike and leave a review description!";
+      //TODO actually create the review
+      res.render("site/menuPages/menuItemReview", { menuItem: menuItem });
+    } catch (e) {
+      res.render("site/menuPages/menuItemReview", { menuItem: menuItem, error: e });
+    }
+  } else {
+    res.redirect("/");
+  }
+});
+
 module.exports = router;
