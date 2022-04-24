@@ -56,10 +56,10 @@ router.post("/createSchedule", async (req, res) => {
 
       const setSeats = await seatData.createSchedule(numSeats);
       res.render("site/setHoursOpen", {
-        success: "Item added to menu Successfully.",
+        success: "Seats added Successfully.",
       });
     } catch (e) {
-      res.status(400).render("site/menuPages/addToMenu", { error: e });
+      res.status(400).render("site/setHoursOpen", { error: e });
     }
   } else {
     res.redirect("/");
