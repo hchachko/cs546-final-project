@@ -4,11 +4,16 @@ const seatData = require("../data/seats");
 
 router.get("/", async (req, res) => {
   if (req.session.user) {
+    const seats = await seatData.getAll();
     try {
       if (req.session.user.employee == "on") {
-        res.render("site/manageReservations");
+        res.render("site/manageReservations", {
+          seats: seats,
+        });
       } else {
-        res.render("site/reserveSeat");
+        res.render("site/reserveSeat", {
+          seats: seats,
+        });
       }
     } catch (e) {
       res.status(400).render("site/homepage", { error: e });
@@ -19,9 +24,12 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/createSchedule", async (req, res) => {
+  const seats = await seatData.getAll();
   if (req.session.user.employee == "on") {
     try {
-      res.render("site/manageReservations");
+      res.render("site/manageReservations", {
+        seats: seats,
+      });
     } catch (e) {
       res.status(400).render("site/homepage", { error: e });
     }
@@ -32,6 +40,7 @@ router.get("/createSchedule", async (req, res) => {
 
 router.post("/createSchedule", async (req, res) => {
   if (req.session.user.employee == "on") {
+    const seats = await seatData.getAll();
     try {
       const numSeats = req.body.numSeats;
       const day = req.body.day;
@@ -48,6 +57,7 @@ router.post("/createSchedule", async (req, res) => {
       const setSeats = await seatData.createSchedule(day, numSeats);
       res.render("site/manageReservations", {
         success: "Seats added Successfully.",
+        seats: seats,
       });
     } catch (e) {
       res.status(400).render("site/manageReservations", { error: e });
@@ -59,8 +69,11 @@ router.post("/createSchedule", async (req, res) => {
 
 router.get("/reserveSeat", async (req, res) => {
   if (req.session.user.employee == null) {
+    const seats = await seatData.getAll();
     try {
-      res.render("site/reserveSeat");
+      res.render("site/reserveSeat", {
+        seats: seats,
+      });
     } catch (e) {
       res.status(400).render("site/homepage", { error: e });
     }
@@ -74,6 +87,7 @@ router.post("/reserveSeat", async (req, res) => {
     try {
       const day = req.body.day;
       const hour = req.body.hour;
+      const seats = await seatData.getAll();
 
       if (day == undefined || hour == undefined) {
         throw "Day and hour must be provided";
@@ -85,6 +99,7 @@ router.post("/reserveSeat", async (req, res) => {
       if (reserve == true) {
         res.render("site/reserveSeat", {
           success: "Your reservation has been received! Thank you.",
+          seats: seats,
         });
       } else {
         res.render("site/reserveSeat", {

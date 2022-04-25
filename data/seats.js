@@ -47,4 +47,12 @@ module.exports = {
     if (insertItem.insertedCount === 0) {
     }
   },
+  getAll: async () => {
+    const seatCollection = await seats();
+    const seatList = await seatCollection.find({}).toArray();
+    for (let x of seatList) {
+      x["_id"] = x["_id"].toString();
+    }
+    return seatList;
+  },
 };
