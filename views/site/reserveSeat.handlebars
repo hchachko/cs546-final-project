@@ -5,17 +5,42 @@
 <div class="Error"> ERROR: {{error}}</div>
 {{/if}}
 
+<h2>Reserve a Seat</h2>
 <form method="POST" action="/seats/reserveSeat" id="reserveSeat">
-    <label id="itemName_label" for="itemName">
+    <label id="dayLabel" for="day">
         Choose the day:
-        <input name="numSeats" type="text" id="numSeats" />
+        <select name="day" id="day">
+            <option value="mon">Monday</option>
+            <option value="tues">Tuesday</option>
+            <option value="wed">Wednesday</option>
+            <option value="thur">Thursday</option>
+            <option value="fri">Friday</option>
+            <option value="sat">Saturday</option>
+            <option value="sun">Sunday</option>
+        </select>
     </label>
-    <label id="itemName_label" for="itemName">
+    <label id="hourLabel" for="hour">
         Choose the hour:
-        <input name="numSeats" type="text" id="numSeats" />
+        <select name="hour" id="hour">
+            <option value="8am">8 AM</option>
+            <option value="9am">9 AM</option>
+            <option value="10am">10 AM</option>
+            <option value="11am">11 AM</option>
+            <option value="12pm">12 PM</option>
+            <option value="1pm">1 PM</option>
+            <option value="2pm">2 PM</option>
+            <option value="3pm">3 PM</option>
+            <option value="4pm">4 PM</option>
+            <option value="5pm">5 PM</option>
+            <option value="6pm">6 PM</option>
+            <option value="7pm">7 PM</option>
+            <option value="8pm">8 PM</option>
+            <option value="9pm">9 PM</option>
+            <option value="10pm">10 PM</option>
+        </select>
     </label>
 
-    <button type="submit">Submit</button>
+    <button type="submit">Reserve</button>
 </form>
 
 <a href="/orderDrink">Go to order drink page</a>
