@@ -5,7 +5,9 @@ const userData = require("../data/users");
 const menuData = require("../data/menu");
 
 router.get("/", (req, res) => {
-  if (req.session.user) {
+  if (req.session.user && req.session.user.employee=="on"){
+    res.redirect("/employeeProfile");
+  } else if (req.session.user) {
     res.redirect("/userProfile");
   } else {
     res.render("site/homepage", {});
