@@ -1,9 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const menuData = require("../data/menu");
-const path = require("path");
+const menuData = require("../data/products/menu");
 let { ObjectId } = require("mongodb");
-const { IncomingMessage } = require("http");
 
 router.get("/", async (req, res) => {
   if (req.session.user) {
@@ -137,7 +135,10 @@ router.post("/:id/review", async (req, res) => {
       const reviewLikeDislike = req.body.reviewLikeDislike;
       const reviewDesc = req.body.reviewDesc;
       if (!reviewLikeDislike || !reviewDesc) throw "You must like/dislike and leave a review description!";
-      //TODO actually create the review
+      if (typeof reviewLikeDislike != 'string' || typeof reviewDesc != 'string') throw "Detected non-string input";
+      if (reviewDesc.trim().length == 0) throw "Detected empty review";
+      if (reviewLikeDislike.trim() != "on") throw "Issue with radio button input";
+      const review = await reviewData.get()
       res.render("site/menuPages/menuItemReview", { menuItem: menuItem });
     } catch (e) {
       res.render("site/menuPages/menuItemReview", { menuItem: menuItem, error: e });

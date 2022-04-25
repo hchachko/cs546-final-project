@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const userData = require("../data/users");
-const menuData = require("../data/menu");
 
 router.get("/", (req, res) => {
   if (req.session.user && req.session.user.employee=="on"){
@@ -156,7 +155,6 @@ router.post("/homepage", async (req, res) => {
       const firstName = checkUser.firstName;
       const lastName = checkUser.lastName;
       const employee = checkUser.employee;
-      console.log(req.session);
       req.session.user = {
         firstName: firstName,
         lastName: lastName,
