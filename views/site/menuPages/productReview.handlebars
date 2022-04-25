@@ -1,0 +1,28 @@
+{{#if posted}}
+    <h4>Review posted successfully!</h4>
+    <a href="/menu/{{menuItem._id}}">Go back to item page</a>
+{{else}}
+    <a href="/menu/{{menuItem._id}}">Cancel Review and go back to item page</a>
+    <form method="POST" action="/productReview/{{menuItem._id}}" id="review-form">
+        <h4>What did you like about the {{menuItem.itemName}}?</h4>
+        <label id="like_label" for="like">
+            Liked it:
+            <input type="radio" id="like" name="reviewLikeDislike"/> 
+        </label>
+        <label id="dislike_label" for="dislike">
+            Disliked it:
+            <input type="radio" id="dislike" name="reviewLikeDislike"/>
+        </label>
+        <br>
+        <label id="reviewDesc_label" for="reviewDesc">
+            Type your review here:
+            <br>
+            <textarea name="reviewDesc"  id="reviewDesc"></textarea>
+        </label>
+        
+        <button type="submit">Post</button>
+    </form>
+    {{#if error}}
+        <div class="Error"> ERROR: {{error}}</div>
+    {{/if}}
+{{/if}}
