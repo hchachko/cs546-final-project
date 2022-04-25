@@ -1,5 +1,6 @@
 const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
+const favoriteBooksOrDrinks = mongoCollections.favoriteBooksOrDrinks;
 const bcrypt = require("bcryptjs");
 const saltRounds = 8;
 
@@ -104,6 +105,17 @@ module.exports = {
     };
     const insertInfo = await userCollection.insertOne(newUser);
     if (insertInfo.insertedCount === 0) throw "could not add user";
+
+    const favoriteBooksOrDrinksCollection = await favoriteBooksOrDrinks();
+    const newId = insertInfo.insertedId;
+    let intializeFavBooksNdDrinks = {
+      userId: newId,
+      user: firstName + " " + lastName,
+      favoriteBooks: [],
+      favoriteDrinks: [],
+    };
+    await favoriteBooksOrDrinksCollection.insertOne(intializeFavBooksNdDrinks);
+
     return { userInserted: true };
   },
   checkUser: async (email, password) => {
@@ -141,6 +153,7 @@ module.exports = {
         firstName: findUser.firstName,
         lastName: findUser.lastName,
         employee: findUser.employee,
+        userId: findUser._id,
       };
     }
   },
