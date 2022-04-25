@@ -16,7 +16,7 @@ module.exports = {
         { upsert: true }
       );
       if (updatedInfo.modifiedCount === 0) {
-        throw "could not update band successfully";
+        throw "could not update data successfully";
       }
       return true;
     } else if (!dayObject[hour] || dayObject[hour] == null) {
