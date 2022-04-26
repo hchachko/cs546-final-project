@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const userData = require("../data/users");
 
 router.get("/", (req, res) => {
-  if (req.session.user && req.session.user.employee=="on"){
+  if (req.session.user && req.session.user.employee == "on") {
     res.redirect("/employeeProfile");
   } else if (req.session.user) {
     res.redirect("/userProfile");
@@ -156,6 +156,7 @@ router.post("/homepage", async (req, res) => {
       const lastName = checkUser.lastName;
       const employee = checkUser.employee;
       req.session.user = {
+        userId: checkUser.userId,
         firstName: firstName,
         lastName: lastName,
         email: email,
@@ -179,6 +180,7 @@ router.post("/homepage", async (req, res) => {
 router.get("/userProfile", (req, res) => {
   if (req.session.user) {
     res.render("site/userProfile", {
+      userId: req.session.user.userId,
       firstName: req.session.user.firstName,
       lastName: req.session.user.lastName,
       email: req.session.user.email,

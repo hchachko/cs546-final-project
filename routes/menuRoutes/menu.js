@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const menuData = require("../../data/products/menu");
+const favoriteBooksOrDrinks = require("../../data/favoriteBookOrDrink");
 let { ObjectId } = require("mongodb");
 
 router.get("/", async (req, res) => {
@@ -76,7 +77,7 @@ router.post("/addToMenu", async (req, res) => {
       const addedMenuItem = await menuData.createItem(
         itemName,
         price,
-        category, 
+        category,
         image
       );
       res.render("site/menuPages/addToMenu", {
@@ -87,6 +88,62 @@ router.post("/addToMenu", async (req, res) => {
     }
   } else {
     res.redirect("/");
+  }
+});
+
+router.post("/addFavDrink", async (req, res) => {
+  const menu = await menuData.getAll();
+  try {
+    const userId = req.session.user.userId;
+    const drinkId = req.body.itemId;
+    const category = req.body.category;
+    const drinkName = req.body.itemName;
+    if (
+      userId == undefined ||
+      drinkId == undefined ||
+      category == undefined ||
+      drinkName == undefined
+    ) {
+      throw "userId, itemId, and category must be provided";
+    }
+    if (
+      typeof userId != "string" ||
+      typeof drinkId != "string" ||
+      typeof category != "string" ||
+      typeof drinkName != "string"
+    ) {
+      throw "userId/itemId/category must be a valid string";
+    }
+    if (
+      userId.trim().length == 0 ||
+      drinkId.trim().length == 0 ||
+      category.trim().length == 0 ||
+      drinkName.trim().length == 0
+    ) {
+      throw "Input(s) must not be empty";
+    }
+    if (category != "drink" && category != "Drink") {
+      throw "category must be drink";
+    }
+    let favoriteDrink = {
+      drink_id: drinkId,
+      drink_name: drinkName,
+    };
+    const user = await favoriteBooksOrDrinks.addToDrinks(userId, favoriteDrink);
+
+    res.render("site/menuPages/menu", {
+      firstName: req.session.user.firstName,
+      menu: menu,
+      employee: req.session.user.employee,
+      success: drinkName + " added to favorites Successfully.",
+    });
+  } catch (e) {
+    res.status(400).render("site/menuPages/menu", {
+      firstName: req.session.user.firstName,
+      menu: menu,
+      employee: req.session.user.employee,
+      error: e,
+    });
   }
 });
 
