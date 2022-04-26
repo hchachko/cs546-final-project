@@ -22,6 +22,7 @@ module.exports = {
   bookCatalog: getCollectionFn("bookCatalog"),
   //productReviews: getCollectionFn("productReviews"),
   favoriteBooksOrDrinks: getCollectionFn("favoriteBooksOrDrinks"),
-  bookReviews: getCollectionFn("bookReviews")
+  bookReviews: getCollectionFn("bookReviews"),
   //comments: getCollectionFn("comments"),
+  seats: getCollectionFn("seats"),
 };
