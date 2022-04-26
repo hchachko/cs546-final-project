@@ -12,7 +12,17 @@
                     <dt>Review from {{this.Reviewer_name}}:</dt>
                     <dd>Rating: {{this.Rating}}/5 stars</dd>
                     <dd>{{this.Summary}}</dd>
-                    <dt><a href="/productReviewsComments/{{this._id}}">Would you like to comment?</a></dt>
+                    {{#if this.Comments}}
+                        <dd>Comments:</dd>
+                        <dd>
+                            <dl>
+                                {{#each this.Comments}}
+                                    <dd>{{this.Commenter_name}} wrote: {{this.Comment_data}}</dd>
+                                {{/each}}
+                            </dl>
+                        </dd>
+                    {{/if}}
+                    <dd><a href="/productReviewsComments/{{this._id}}">Would you like to comment?</a></dd>
                 {{/each}}
             </dl>
         {{else}}

@@ -17,7 +17,6 @@ module.exports = {
         }
         throw "Review not found";
     },
-    //create a new menu item
     create: async (productId, reviewerName, rating, summary) => {
         if (!productId || !reviewerName || !summary) throw "All fields must be provided";
         if (typeof productId != "string" || typeof reviewerName != "string" || typeof summary != "string") throw "Detected non-string input(s)";
