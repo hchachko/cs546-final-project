@@ -11,13 +11,13 @@
                 {{#each menuItem.reviews}}
                     <dt>Review from {{this.Reviewer_name}}:</dt>
                     <dd>Rating: {{this.Rating}}/5 stars</dd>
-                    <dd>{{this.Summary}}</dd>
+                    <dd>{{this.Reviewer_name}} wrote: {{this.Summary}}</dd>
                     {{#if this.Comments}}
                         <dd>Comments:</dd>
                         <dd>
                             <dl>
                                 {{#each this.Comments}}
-                                    <dd>{{this.Commenter_name}} wrote: {{this.Comment_data}}</dd>
+                                    <dd>{{this.Commenter_name}} found this review {{this.Helpful_Review}}! Their comment: {{this.Comment_data}}</dd>
                                 {{/each}}
                             </dl>
                         </dd>

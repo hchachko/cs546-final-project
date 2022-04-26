@@ -3,13 +3,14 @@ const menu = mongoCollections.menu;
 let { ObjectId } = require('mongodb');
 
 module.exports = {
-    create: async (reviewId, commenterName, commentData) => {
-        if (!reviewId || !commenterName || !commentData) throw "All fields must be provided";
-        if (typeof reviewId != "string" || typeof commenterName != "string" || typeof commentData != "string") throw "Detected non-string input(s)";
-        reviewId = reviewId.trim()
+    create: async (reviewId, commenterName, helpfulReview, commentData) => {
+        if (!reviewId || !commenterName || !helpfulReview || !commentData) throw "All fields must be provided";
+        if (typeof reviewId != "string" || typeof commenterName != "string" || typeof helpfulReview != "string" || typeof commentData != "string") throw "Detected non-string input(s)";
+        reviewId = reviewId.trim();
         commenterName = commenterName.trim();
         commentData = commentData.trim();
         if (reviewId.length == 0 || commenterName.length == 0 || commentData.length == 0) throw "Detected empty string input(s)";
+        if (helpfulReview != "helpful" && helpfulReview != "unhelpful") throw "Unexpected value from dropdown";
         if (!ObjectId.isValid(reviewId)) throw "Detected invalid productId";
         const menuCollection = await menu();
         const product = await menuCollection.find({"reviews._id": ObjectId(reviewId)}).toArray();
@@ -26,6 +27,7 @@ module.exports = {
         const commentId = new ObjectId();
         const comment = {
             _id: commentId,
+            Helpful_Review: helpfulReview,
             Commenter_name: commenterName,
             Comment_data: commentData
         }

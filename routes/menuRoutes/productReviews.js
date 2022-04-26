@@ -39,17 +39,16 @@ router.post("/:id", async (req, res) => {
       return;
     }
     try {
-      const reviewLikeDislike = req.body.reviewLikeDislike;
+      const likeDislike = req.body.likeDislike;
       const reviewRating = req.body.reviewRating;
       const reviewDesc = req.body.reviewDesc;
-      if (!reviewLikeDislike || !reviewRating || !reviewDesc) throw "You must like/dislike, leave a rating and a review description!";
-      if (typeof reviewLikeDislike != "string" || typeof reviewRating != "string" || typeof reviewDesc != "string") throw "Detected non-string input";
+      if (!likeDislike || !reviewRating || !reviewDesc) throw "You must like/dislike, leave a rating and a review description!";
+      if (typeof likeDislike != "string" || typeof reviewRating != "string" || typeof reviewDesc != "string") throw "Detected non-string input";
       let rating = parseInt(reviewRating);
       if (typeof rating != "number") throw "Detected non-number input";
       if (!Number.isInteger(rating)) throw "Detected non-integer input";
       if (!(1 <= rating && rating <=5)) "Review rating out of range";
       if (reviewDesc.trim().length == 0) throw "Detected empty review";
-      if (reviewLikeDislike.trim() != "on") throw "Unexpected output from radio button input";
       const review = await reviewData.create(req.params.id, req.session.user.firstName, rating, reviewDesc);
       res.render("site/menuPages/productReview", { menuItem: menuItem, posted: true });
     } catch (e) {
