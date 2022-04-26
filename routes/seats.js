@@ -7,11 +7,11 @@ router.get("/", async (req, res) => {
     const seats = await seatData.getAll();
     try {
       if (req.session.user.employee == "on") {
-        res.render("site/manageReservations", {
+        res.render("site/seatReservation/manageReservations", {
           seats: seats,
         });
       } else {
-        res.render("site/reserveSeat", {
+        res.render("site/seatReservation/reserveSeat", {
           seats: seats,
         });
       }
@@ -27,11 +27,13 @@ router.get("/createSchedule", async (req, res) => {
   const seats = await seatData.getAll();
   if (req.session.user.employee == "on") {
     try {
-      res.render("site/manageReservations", {
+      res.render("site/seatReservation/manageReservations", {
         seats: seats,
       });
     } catch (e) {
-      res.status(400).render("site/homepage", { error: e });
+      res
+        .status(400)
+        .render("site/seatReservation/homepage", { error: e, seats: seats });
     }
   } else {
     res.redirect("/");
@@ -55,12 +57,15 @@ router.post("/createSchedule", async (req, res) => {
         throw "Number of seats must not be empty";
       }
       const setSeats = await seatData.createSchedule(day, numSeats);
-      res.render("site/manageReservations", {
+      res.render("site/seatReservation/manageReservations", {
         success: "Seats added Successfully.",
         seats: seats,
       });
     } catch (e) {
-      res.status(400).render("site/manageReservations", { error: e });
+      res.status(400).render("site/seatReservation/manageReservations", {
+        error: e,
+        seats: seats,
+      });
     }
   } else {
     res.redirect("/");
@@ -71,11 +76,11 @@ router.get("/reserveSeat", async (req, res) => {
   if (req.session.user.employee == null) {
     const seats = await seatData.getAll();
     try {
-      res.render("site/reserveSeat", {
+      res.render("site/seatReservation/reserveSeat", {
         seats: seats,
       });
     } catch (e) {
-      res.status(400).render("site/homepage", { error: e });
+      res.status(400).render("site/homepage", { error: e, seats: seats });
     }
   } else {
     res.redirect("/");
@@ -97,17 +102,20 @@ router.post("/reserveSeat", async (req, res) => {
       }
       const reserve = await seatData.reserveSeat(day, hour);
       if (reserve == true) {
-        res.render("site/reserveSeat", {
+        res.render("site/seatReservation/reserveSeat", {
           success: "Your reservation has been received! Thank you.",
           seats: seats,
         });
       } else {
-        res.render("site/reserveSeat", {
+        res.render("site/seatReservation/reserveSeat", {
           error: "Sorry, that time is not available. Please choose another :)",
+          seats: seats,
         });
       }
     } catch (e) {
-      res.status(400).render("site/reserveSeat", { error: e });
+      res
+        .status(400)
+        .render("site/seatReservation/reserveSeat", { error: e, seats: seats });
     }
   } else {
     res.redirect("/");
