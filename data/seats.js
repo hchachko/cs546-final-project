@@ -25,6 +25,13 @@ module.exports = {
   },
   createSchedule: async (day, numSeats) => {
     const seatCollection = await seats();
+    const dayFound = await seatCollection.findOne({
+      name: day,
+    });
+    if (dayFound) {
+      throw `Error: That day already exists in the database`;
+    }
+
     let newItem = {
       name: day,
       "8am": numSeats,
