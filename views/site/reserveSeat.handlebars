@@ -1,0 +1,99 @@
+{{#if success}}
+<div class="Success"> {{success}} </div>
+{{/if}}
+{{#if error}}
+<div class="Error"> ERROR: {{error}}</div>
+{{/if}}
+
+<h2>Reserve a Seat</h2>
+<form method="POST" action="/seats/reserveSeat" id="reserveSeat">
+    <label id="dayLabel" for="day">
+        Choose the day:
+        <select name="day" id="day">
+            <option value="mon">Monday</option>
+            <option value="tues">Tuesday</option>
+            <option value="wed">Wednesday</option>
+            <option value="thur">Thursday</option>
+            <option value="fri">Friday</option>
+            <option value="sat">Saturday</option>
+            <option value="sun">Sunday</option>
+        </select>
+    </label>
+    <label id="hourLabel" for="hour">
+        Choose the hour:
+        <select name="hour" id="hour">
+            <option value="8am">8 AM</option>
+            <option value="9am">9 AM</option>
+            <option value="10am">10 AM</option>
+            <option value="11am">11 AM</option>
+            <option value="12pm">12 PM</option>
+            <option value="1pm">1 PM</option>
+            <option value="2pm">2 PM</option>
+            <option value="3pm">3 PM</option>
+            <option value="4pm">4 PM</option>
+            <option value="5pm">5 PM</option>
+            <option value="6pm">6 PM</option>
+            <option value="7pm">7 PM</option>
+            <option value="8pm">8 PM</option>
+            <option value="9pm">9 PM</option>
+            <option value="10pm">10 PM</option>
+        </select>
+    </label>
+
+    <button type="submit">Reserve</button>
+</form>
+
+<div class="week">
+    {{#each seats}}
+    <div class="day">
+        <h1>{{this.name}}</h1>
+        <div class="hour">
+            <h3>8 AM <span class="faded">{{this.8am}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>9 AM <span class="faded">{{this.9am}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>10 AM <span class="faded">{{this.10am}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>11 AM <span class="faded">{{this.11am}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>12 PM <span class="faded">{{this.12pm}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>1 PM <span class="faded">{{this.1pm}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>2 PM <span class="faded">{{this.2pm}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>3 PM <span class="faded">{{this.3pm}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>4 PM <span class="faded">{{this.4pm}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>5 PM <span class="faded">{{this.5pm}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>6 PM <span class="faded">{{this.6pm}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>7 PM <span class="faded">{{this.7pm}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>8 PM <span class="faded">{{this.8pm}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>9 PM <span class="faded">{{this.9pm}} seats</span></h3>
+        </div>
+        <div class="hour">
+            <h3>10 PM <span class="faded">{{this.10pm}} seats</span></h3>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<a href="/orderDrink">Go to order drink page</a>

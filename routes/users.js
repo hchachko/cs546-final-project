@@ -192,7 +192,6 @@ router.get("/userProfile", (req, res) => {
 });
 
 router.get("/employeeProfile", (req, res) => {
-  //TODO when redirected back to profile page the empolyee is treated as a normal user instead of an employee
   if (req.session.user) {
     res.render("site/employeeProfile", {
       firstName: req.session.user.firstName,

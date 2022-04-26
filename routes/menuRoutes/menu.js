@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
+<<<<<<< HEAD:routes/menu.js
 const menuData = require("../data/products/menu");
 const favoriteBooksOrDrinks = require("../data/favoriteBookOrDrink");
+=======
+const menuData = require("../../data/products/menu");
+>>>>>>> 439d10a377349c4329abd8745245611850d5a79e:routes/menuRoutes/menu.js
 let { ObjectId } = require("mongodb");
 
 router.get("/", async (req, res) => {
@@ -151,8 +155,12 @@ router.get("/:id", async (req, res) => {
   if (req.session.user) {
     try {
       if (!req.params.id) throw "id needed";
-      if (!ObjectId.isValid(req.params.id)) throw "id is not a valid Object ID";
-      const menuItem = await menuData.get(req.params.id);
+      let id = req.params.id;
+      if (typeof id != "string") throw "id must be a string";
+      id = id.trim();
+      if (id.length == 0) throw "id is an empty string"
+      if (!ObjectId.isValid(id)) throw "id is not a valid Object ID";
+      const menuItem = await menuData.get(id);
       res.render("site/menuPages/menuItem", { menuItem: menuItem });
     } catch (e) {
       res.status(400).render("site/homepage", { error: e });
@@ -162,6 +170,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+<<<<<<< HEAD:routes/menu.js
 router.get("/:id/review", async (req, res) => {
   if (req.session.user) {
     try {
@@ -211,4 +220,6 @@ router.post("/:id/review", async (req, res) => {
   }
 });
 
+=======
+>>>>>>> 439d10a377349c4329abd8745245611850d5a79e:routes/menuRoutes/menu.js
 module.exports = router;
