@@ -1,0 +1,24 @@
+{{#if posted}}
+    <h4>Comment posted successfully!</h4>
+    <a href="/menu">Go back to menu</a>
+{{else}}
+    <a href="/menu">Cancel Comment and go back to menu</a>
+    <dl>
+        <dt>Review from {{review.Reviewer_name}}</dt>
+        <dt>Their rating: {{review.Rating}}/5 stars</dt>
+        <dt>Sumamry:</dt>
+        <dd>{{review.Summary}}</dd>
+    </dl>
+    <form method="POST" action="/productReviews/{{reviewItem._id}}" id="comment-form">
+        <label id="comment_label" for = "comment">
+            Comment Here:
+            <br>
+            <textarea name="comment"  id = "comment"></textarea>
+        </label>
+        
+        <button type="submit">Post</button>
+    </form>
+    {{#if error}}
+        <div class="Error"> ERROR: {{error}}</div>
+    {{/if}}
+{{/if}}

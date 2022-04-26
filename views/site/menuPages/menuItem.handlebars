@@ -9,8 +9,10 @@
         {{#if menuItem.reviews}}
             <dl>
                 {{#each menuItem.reviews}}
-                    <dt>Review by {{this.Reviewer_name}}:</dt>
+                    <dt>Review from {{this.Reviewer_name}}:</dt>
+                    <dd>Rating: {{this.Rating}}/5 stars</dd>
                     <dd>{{this.Summary}}</dd>
+                    <dt><a href="/productReviewsComments/{{this._id}}">Would you like to comment?</a></dt>
                 {{/each}}
             </dl>
         {{else}}
@@ -18,4 +20,4 @@
         {{/if}}
     </dd>
 </dl>
-<a href="/productReview/{{menuItem._id}}">Would you like to write a review?</a>
+<a href="/productReviews/{{menuItem._id}}">Would you like to write a review?</a>

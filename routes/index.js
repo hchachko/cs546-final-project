@@ -1,9 +1,11 @@
 const userRoutes = require("./users");
-const menuRoutes = require("./menu");
-const productReviewRoutes = require("./productReview");
+const menuRoutes = require("./menuRoutes/menu");
+const productReviewsRoutes = require("./menuRoutes/productReviews");
+const productReviewsCommentsRoutes = require("./menuRoutes/productReviewsComments");
 const constructorMethod = (app) => {
   app.use("/menu", menuRoutes);
-  app.use("/productReview", productReviewRoutes);
+  app.use("/productReviews", productReviewsRoutes);
+  app.use("/productReviewsComments", productReviewsCommentsRoutes);
   app.use("/", userRoutes);
 
   app.use("*", (req, res) => {

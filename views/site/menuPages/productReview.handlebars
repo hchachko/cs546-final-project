@@ -3,7 +3,7 @@
     <a href="/menu/{{menuItem._id}}">Go back to item page</a>
 {{else}}
     <a href="/menu/{{menuItem._id}}">Cancel Review and go back to item page</a>
-    <form method="POST" action="/productReview/{{menuItem._id}}" id="review-form">
+    <form method="POST" action="/productReviews/{{menuItem._id}}" id="review-form">
         <h4>What did you like about the {{menuItem.itemName}}?</h4>
         <label id="like_label" for="like">
             Liked it:
@@ -14,10 +14,16 @@
             <input type="radio" id="dislike" name="reviewLikeDislike"/>
         </label>
         <br>
-        <label id="reviewDesc_label" for="reviewDesc">
+        <label id="rating_label" for="reviewRating">
+            Rating (from 1-5 stars):
+            <br>
+            <input type="number" name = "reviewRating" id="reviewRating" min="1" max="5">
+        </label>
+        <br>
+        <label id="reviewDesc_label" for = "reviewDesc">
             Type your review here:
             <br>
-            <textarea name="reviewDesc"  id="reviewDesc"></textarea>
+            <textarea name="reviewDesc"  id = "reviewDesc"></textarea>
         </label>
         
         <button type="submit">Post</button>
