@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const userData = require("../data/users");
-const menuData = require("../data/menu");
 
 router.get("/", (req, res) => {
-  if (req.session.user) {
+  if (req.session.user && req.session.user.employee=="on"){
+    res.redirect("/employeeProfile");
+  } else if (req.session.user) {
     res.redirect("/userProfile");
   } else {
     res.render("site/homepage", {});
@@ -154,7 +155,6 @@ router.post("/homepage", async (req, res) => {
       const firstName = checkUser.firstName;
       const lastName = checkUser.lastName;
       const employee = checkUser.employee;
-      console.log(req.session);
       req.session.user = {
         firstName: firstName,
         lastName: lastName,

@@ -1,12 +1,33 @@
 <!-- Still a work in progress (Harrison) -->
 <a href="/menu">Back to Menu</a>
 <h2>{{menuItem.itemName}}</h2>
-<h3>{{menuItem.price}}</h3>
 <img alt = "{{menuItem.itemName}}" src = "{{menuItem.image}}">
-<p>Reviews:</p>
-{{#if menuItem.reviews}}
-    <!-- TODO -->
-{{else}}
-    <p>None yet!</p>
-{{/if}}
-<a href="/menu/{{menuItem._id}}/review">Would you like to write a review?</a>
+<dl>
+    <dt><h3>Price: {{menuItem.price}}</h3></dl>
+    <dt><h3>Reviews:</h3></dt>
+    <dd>
+        {{#if menuItem.reviews}}
+            <dl>
+                {{#each menuItem.reviews}}
+                    <dt>Review from {{this.Reviewer_name}}:</dt>
+                    <dd>Rating: {{this.Rating}}/5 stars</dd>
+                    <dd>{{this.Summary}}</dd>
+                    {{#if this.Comments}}
+                        <dd>Comments:</dd>
+                        <dd>
+                            <dl>
+                                {{#each this.Comments}}
+                                    <dd>{{this.Commenter_name}} wrote: {{this.Comment_data}}</dd>
+                                {{/each}}
+                            </dl>
+                        </dd>
+                    {{/if}}
+                    <dd><a href="/productReviewsComments/{{this._id}}">Would you like to comment?</a></dd>
+                {{/each}}
+            </dl>
+        {{else}}
+            <h5>None yet!</h5>
+        {{/if}}
+    </dd>
+</dl>
+<a href="/productReviews/{{menuItem._id}}">Would you like to write a review?</a>
