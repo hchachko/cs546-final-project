@@ -38,11 +38,13 @@ router.post("/:reviewId", async (req, res) => {
             return;
         }
         try {
+            const helpfulReview = req.body.helpfulReview;
             const commentData = req.body.comment;
-            if (!commentData) throw "You must leave a comment!";
-            if (typeof commentData != "string") throw "Detected non-string input";
+            if (!helpfulReview || !commentData) throw "You must agree/disagree and leave a comment!";
+            if (typeof helpfulReview != "string" || typeof commentData != "string") throw "Detected non-string input";
+            if (helpfulReview != "helpful" && helpfulReview != "unhelpful") throw "Unexpected value from dropdown menu";
             if (commentData.trim().length == 0) throw "Detected empty comment";
-            const comment = await reviewCommentData.create(req.params.reviewId, req.session.user.firstName, commentData);
+            const comment = await reviewCommentData.create(req.params.reviewId, req.session.user.firstName, helpfulReview, commentData);
             res.render("site/menuPages/productReviewComment", { review: review, posted: true });
         } catch (e) {
             res.render("site/menuPages/productReviewComment", { review: review, error: e});

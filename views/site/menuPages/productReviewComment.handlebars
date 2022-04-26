@@ -7,10 +7,18 @@
     <dl>
         <dt>Their Rating:</dt>
         <dd>{{review.Rating}}/5 stars</dt>
-        <dt>Review:</dt>
+        <dt>Their Review:</dt>
         <dd>{{review.Summary}}</dd>
     </dl>
     <form method="POST" action="/productReviewsComments/{{review._id}}" id="comment-form">
+        <label id="helpfulReveiw_label" for="helpfulReview">
+        Did you find this review helpful?
+            <select name="helpfulReview" id="helpfulReview">
+                <option value="helpful">Yes</option>
+                <option value="unhelpful">No</option>
+            </select>
+        </label>
+        <br>
         <label id="comment_label" for = "comment">
             Comment Here:
             <br>
