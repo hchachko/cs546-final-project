@@ -1,0 +1,33 @@
+{{#if posted}}
+    <h4>Review posted successfully!</h4>
+    <a href="/catalog/{{book._id}}">Go back to book page</a>
+{{else}}
+    <a href="/catalog/{{book._id}}">Cancel Review and go back to book page</a>
+    <form method="POST" action="/bookReviews/{{book._id}}" id="review-form">
+        <h4>What did you think about the {{book.bookName}}?</h4>
+        <label id="likeDislike_label" for="likeDislike">
+            Did you like or dislike it?
+            <select name="likeDislike" id="likeDislike">
+                <option value="like">I liked it</option>
+                <option value="dislike">I disliked it</option>
+            </select>
+        </label>
+        <br>
+        <label id="rating_label" for="reviewRating">
+            Rating (from 1-5 stars):
+            <br>
+            <input type="number" name = "reviewRating" id="reviewRating" min="1" max="5">
+        </label>
+        <br>
+        <label id="reviewDesc_label" for = "reviewDesc">
+            Type your review here:
+            <br>
+            <textarea name="reviewDesc"  id = "reviewDesc"></textarea>
+        </label>
+        
+        <button type="submit">Post</button>
+    </form>
+    {{#if error}}
+        <div class="Error"> ERROR: {{error}}</div>
+    {{/if}}
+{{/if}}
