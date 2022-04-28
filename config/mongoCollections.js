@@ -19,10 +19,7 @@ const getCollectionFn = (collection) => {
 module.exports = {
   users: getCollectionFn("users"),
   menu: getCollectionFn("menu"),
-  bookCatalog: getCollectionFn("bookCatalog"),
-  //productReviews: getCollectionFn("productReviews"),
+  catalog: getCollectionFn("catalog"),
   favoriteBooksOrDrinks: getCollectionFn("favoriteBooksOrDrinks"),
-  bookReviews: getCollectionFn("bookReviews"),
-  //comments: getCollectionFn("comments"),
-  seats: getCollectionFn("seats"),
+  seats: getCollectionFn("seats")
 };

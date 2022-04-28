@@ -14,7 +14,7 @@ router.get("/:reviewId", async (req, res) => {
         if (reviewId.length == 0) throw "Detected an id with an empty string"
         if (!ObjectId.isValid(reviewId)) throw "Detected an id that is not a valid Object ID";
         const review = await reviewData.get(reviewId);
-        res.render("site/menuPages/productReviewComment", { review: review });
+        res.render("site/menu/productReviewComment", { review: review });
       } catch (e) {
         res.status(400).render("site/homepage", { error: e });
       }
@@ -45,9 +45,9 @@ router.post("/:reviewId", async (req, res) => {
             if (helpfulReview != "helpful" && helpfulReview != "unhelpful") throw "Unexpected value from dropdown menu";
             if (commentData.trim().length == 0) throw "Detected empty comment";
             const comment = await reviewCommentData.create(req.params.reviewId, req.session.user.firstName, helpfulReview, commentData);
-            res.render("site/menuPages/productReviewComment", { review: review, posted: true });
+            res.render("site/menu/productReviewComment", { review: review, posted: true });
         } catch (e) {
-            res.render("site/menuPages/productReviewComment", { review: review, error: e});
+            res.render("site/menu/productReviewComment", { review: review, error: e});
         }
     } else {
       res.redirect("/");

@@ -17,9 +17,10 @@ module.exports = {
         }
         throw "Review not found";
     },
-    create: async (productId, reviewerName, rating, summary) => {
-        if (!productId || !reviewerName || !summary) throw "All fields must be provided";
-        if (typeof productId != "string" || typeof reviewerName != "string" || typeof summary != "string") throw "Detected non-string input(s)";
+    create: async (productId, reviewerName, likeDislike, rating, summary) => {
+        if (!productId || !reviewerName || !likeDislike || !rating || !summary) throw "All fields must be provided";
+        if (typeof productId != "string" || typeof reviewerName != "string" || typeof likeDislike != "string" || typeof summary != "string") throw "Detected non-string input(s)";
+        if (likeDislike != "like" && likeDislike != "dislike") throw "Unexpected value from dropdown menu";
         if (typeof rating != "number") throw "Detected non-number input";
         if (!Number.isInteger(rating)) throw "Detected non-integer input";
         if (!(1 <= rating && rating <=5)) "Review rating out of range";
@@ -40,6 +41,16 @@ module.exports = {
             Comments: []
         }
         product.reviews.push(review);
+        let totalLikes = product.likes;
+        let totalDislikes = product.dislikes;
+        if (likeDislike === "like"){
+            totalLikes++;
+            product.likes = totalLikes;
+        } 
+        else{
+            totalDislikes++;
+            product.dislikes = totalDislikes;
+        }
         const updatedInfo = await menuCollection.updateOne(
             { _id: ObjectId(productId) },
             { $set: product }

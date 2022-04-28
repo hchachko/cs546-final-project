@@ -1,23 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const menuData = require("../../data/products/menu");
+const catalogData = require("../../data/books/catalog");
 const favoriteBooksOrDrinks = require("../../data/favoriteBookOrDrink");
 let { ObjectId } = require("mongodb");
 
 router.get("/", async (req, res) => {
   if (req.session.user) {
     try {
-      const menu = await menuData.getAll();
+      const catalog = await catalogData.getAll();
       if (req.session.user.employee == "on") {
-        res.render("site/menu/menu", {
+        res.render("site/catalog/catalog", {
           firstName: req.session.user.firstName,
-          menu: menu,
+          catalog: catalog,
           employee: req.session.user.employee,
         });
       } else {
-        res.render("site/menu/menu", {
+        res.render("site/catalog/catalog", {
           firstName: req.session.user.firstName,
-          menu: menu,
+          catalog: catalog,
         });
       }
     } catch (e) {
@@ -28,10 +28,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/addToMenu", async (req, res) => {
+router.get("/addToCatalog", async (req, res) => {
   if (req.session.user.employee == "on") {
     try {
-      res.render("site/menu/addToMenu", {
+      res.render("site/catalog/addToCatalog", {
         firstName: req.session.user.firstName,
       });
     } catch (e) {
@@ -42,50 +42,32 @@ router.get("/addToMenu", async (req, res) => {
   }
 });
 
-router.post("/addToMenu", async (req, res) => {
+router.post("/addToCatalog", async (req, res) => {
   if (req.session.user.employee == "on") {
     try {
-      const itemName = req.body.itemName;
-      const price = req.body.price;
+      const bookName = req.body.bookName;
+      const numCopies = req.body.numCopies;
+      const genre = req.body.genre;
       const image = req.body.image;
-      if (
-        itemName == undefined ||
-        price == undefined ||
-        image == undefined
-      ) {
-        throw "itemName, price, category, and image must be provided";
-      }
-      if (
-        typeof itemName != "string" ||
-        typeof price != "string" ||
-        typeof image != "string"
-      ) {
-        throw "itemName/price/category/image must be a valid string";
-      }
-      if (
-        itemName.trim().length == 0 ||
-        price.trim().length == 0 ||
-        image.trim().length == 0
-      ) {
-        throw "Input(s) must not be empty";
-      }
-
-      const addedMenuItem = await menuData.createItem(
-        itemName,
-        price,
-        image
-      );
-      res.render("site/menu/addToMenu", {
-        success: "Item added to menu Successfully.",
+      if (!bookName || !numCopies || !genre || !image) throw "All fields must be provided";
+      if (typeof bookName != "string" || typeof genre != "string" || typeof image != "string") throw "Detected non-string input(s)";
+      let numCopiesConverted = parseInt(numCopies);
+      if (typeof numCopiesConverted != "number") throw "Detected non-number input";
+      if (!Number.isInteger(numCopiesConverted)) throw "Detected non-integer input";
+      if (numCopiesConverted < 1) "numCopies rating out of range";
+      if (bookName.trim().length == 0 || genre.trim().length == 0 || image.trim().length == 0) throw "Detected empty string input(s)";
+      const addedBook = await catalogData.createItem(bookName, numCopiesConverted, genre, image);
+      res.render("site/catalog/addToCatalog", {
+        success: "Item added to catalog Successfully.",
       });
     } catch (e) {
-      res.status(400).render("site/menu/addToMenu", { error: e });
+      res.status(400).render("site/catalog/addToCatalog", { error: e });
     }
   } else {
     res.redirect("/");
   }
 });
-
+/*
 router.post("/addFavDrink", async (req, res) => {
   const menu = await menuData.getAll();
   try {
@@ -141,7 +123,7 @@ router.post("/addFavDrink", async (req, res) => {
     });
   }
 });
-
+*/
 router.get("/:id", async (req, res) => {
   if (req.session.user) {
     try {
@@ -151,8 +133,8 @@ router.get("/:id", async (req, res) => {
       id = id.trim();
       if (id.length == 0) throw "id is an empty string"
       if (!ObjectId.isValid(id)) throw "id is not a valid Object ID";
-      const menuItem = await menuData.get(id);
-      res.render("site/menu/menuItem", { menuItem: menuItem });
+      const book = await catalogData.get(id);
+      res.render("site/catalog/book", { book: book });
     } catch (e) {
       res.status(400).render("site/homepage", { error: e });
     }

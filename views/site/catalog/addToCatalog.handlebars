@@ -1,0 +1,28 @@
+{{#if success}}
+<div class="Success"> {{success}} </div>
+{{/if}}
+{{#if error}}
+<div class="Error"> ERROR: {{error}}</div>
+{{/if}}
+
+<form method="POST" action="/catalog/addToCatalog" id="addToCatalogForm">
+	<label id = "bookName_label" for="bookName">
+        Book Name:
+        <input name="bookName" type="text" id="bookName"/>
+    </label>
+    <label id="numCopies_label" for="numCopies">
+        Number of copies avaliable:
+        <input type="number" name = "numCopies" id="numCopies" min="1">
+    </label>
+    <label id = "genre_label" for="genre">
+        Genre:
+        <input name="genre" type="text" id="genre"/>
+    </label>
+    <label id = "image_label" for="image">
+        Image URL:
+        <input name="image" type="text" id="image"/>
+    </label>
+	<button type="submit">Submit</button>
+</form>
+
+<a href="/employeeProfile">Back to Employee Profile</a>

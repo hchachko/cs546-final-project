@@ -3,34 +3,22 @@ const menu = mongoCollections.menu;
 let { ObjectId } = require("mongodb");
 
 module.exports = {
-  //create a new menu item
-  createItem: async (itemName, price, category, image) => {
-    if (itemName == undefined || price == undefined || category == undefined) {
-      throw "All fields must be provided";
-    }
-    if (
-      typeof itemName != "string" ||
-      typeof price != "string" ||
-      typeof category != "string" ||
-      typeof image != "string"
-    ) {
-      throw "item/name/category/image must be a valid string";
-    }
-    if (
-      itemName.trim().length == 0 ||
-      price.trim().length == 0 ||
-      category.trim().length == 0 ||
-      image.trim().length == 0
-    ) {
-      throw "item name/price/category/image must not be empty";
-    }
+  createItem: async (itemName, price, image) => {
+    if (itemName == undefined || price == undefined || image == undefined) throw "All fields must be provided";
+    if (typeof itemName != "string" || typeof price != "string" || typeof image != "string") throw "Detected non-string input(s)";
+    itemName = itemName.trim();
+    price = price.trim();
+    image = image.trim();
+    if (itemName.length == 0 || price.length == 0 || image.length == 0) throw "Detected empty string(s)";
     const menuCollection = await menu();
     let newItem = {
       itemName: itemName,
       price: price,
-      category: category,
+      category: 'drink',
       image: image,
-      reviews: [],
+      likes: 0,
+      dislikes: 0, 
+      reviews: []
     };
     const insertItem = await menuCollection.insertOne(newItem);
     if (insertItem.insertedCount === 0) {
