@@ -1,32 +1,68 @@
-<h2>Sign Up</h2>
+<div class="homepage">
+	<div class="homepageInfo">
+		<h3>Welcome to JavaReads Cafe!</h3>
+		<p class="homepage_intro">
+			Welcome to JavaReads-Cafe, a Hoboken located coffee-shop where users can purchase various types of coffee,
+			pastries,
+			and smoothies. Before ordering, users have the option of reserving seats in the restaurant for a block of
+			time.
+			Users can also like or dislike, and write reviews for products being offered at the cafe.
+		</p>
+		<p class="homepage_intro">On top of selling coffee to customers, JavaReads-Cafe has the unique twist of hosting
+			a reading community, where users can browse through the cafe's book catalog online and read them at the
+			cafe.
+			Just like the food/drinks, users can write reviews of books that are part of the cafe's book catalog on the
+			website. JavaReads-Cafe's web application will deliver a platform that allows for quick and easy purchases,
+			while at
+			the same time bringing together readers within the Hoboken community. Customers can walk in or out, or stay
+			and enjoy
+			seating within the cafe, making JavaReads-Cafe a place for every type of coffee enthusiast.</p>
 
-{{#if error}}
-    <div class="Error"> ERROR: {{error}}</div>
-{{/if}}
-<form method="POST" action="/signup" id="signup-form">
-	<label id="firstName_label" for="firstName">
-		First Name:
-		<input name="firstName"  id="firstName"/>
-	</label>
+		<div id="homepage_pics" class="carousel slide" data-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img class="d-block w-100" src="../../public/images/bookCafe.jpeg" alt="cafeBooks">
+				</div>
+				<div class="carousel-item">
+					<img class="d-block w-100" src="../../public/images/cafe.jpeg" alt="cafe">
+				</div>
+			</div>
+		</div>
+	</div>
 
-	<label id="lastName_label" for="lastName">
-		Last Name:
-		<input name="lastName" type="text" id="lastName"/>
-	</label>
 
-	<label id="email_label" for="email">
-		Email:
-		<input name="email" type="text" id="email"/>
-	</label>
 
-	<label id="password_label" for="password">
-		Password:
-		<input name="password" type="password" id="password"/>
-	</label>
-	<label id = "employee_label" for="employee">
-		Employee?
-		<input name="employee" type="checkbox" id="employee"/>
-	</label>
+	<form method="POST" action="/signup" id="signup-form">
+		<h2>Sign Up</h2>
+		{{#if error}}
+		<div class="Error"> ERROR: {{error}}</div>
+		{{/if}}
+		<label id="firstName_label" for="firstName">
+			First Name:
+			<input name="firstName" id="firstName" placeholder="Your first name..." />
+		</label>
 
-	<button type="submit">Submit</button>
-</form>
+		<label id="lastName_label" for="lastName">
+			Last Name:
+			<input name="lastName" type="text" id="lastName" placeholder="Your last name..." />
+		</label>
+
+		<label id="email_label" for="email">
+			Email:
+			<input name="email" type="text" id="email" placeholder="Your email..." />
+		</label>
+
+		<label id="password_label" for="password">
+			Password:
+			<input name="password" type="password" id="password" placeholder="Your password..." />
+		</label>
+		<label id="employee_label" for="employee">
+			Employee?
+			<input name="employee" type="checkbox" id="employee" />
+		</label>
+
+		<button type="submit">Submit</button>
+	</form>
+
+
+</div>
