@@ -39,6 +39,10 @@ button {
   color: white;
 }
 
+button:hover {
+  background-color: #9e6f46;
+}
+
 label {
   width: 100%;
 }
@@ -51,6 +55,7 @@ label {
   align-items: center;
   width: 400px;
   margin: auto;
+  margin-left: 50px;
   padding: 30px 25px;
   border-radius: 35px;
   background-color: #3b555d;
@@ -93,6 +98,35 @@ button:focus {
 #employee {
   width: 20px !important;
   margin-bottom: 0;
+}
+
+/* Employee/User Profile */
+
+.profileList {
+  margin-top: 35px;
+  padding: 0;
+}
+
+.listItem a {
+  background-color: #3b555d;
+  text-decoration: none;
+  padding: 15px;
+  width: 100%;
+  border-width: 1;
+  border-style: solid;
+  border-color: #3b555d;
+  border-radius: 30px;
+}
+
+.listItem {
+  list-style-type: none;
+  margin-bottom: 40px;
+}
+
+.listItem a:hover {
+  border-width: 1;
+  border-style: solid;
+  border-color: #955f31;
 }
 /* Seat Reservation */
 .week {
