@@ -156,6 +156,7 @@ h2 {
   text-align: center;
   margin-bottom: 20px;
 }
+
 /* Seat Reservation */
 .week {
   display: inline-flex;
@@ -207,4 +208,24 @@ h3 {
 
 h1 {
   text-align: center;
+}
+
+/* Menu & Catalog*/
+.menuComponent,
+.catalogComponent {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.menuItem,
+.book {
+  background-color: #3b555d;
+  padding: 15px 15px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 10px 15px #0000001c;
+}
+
+img {
+  margin-bottom: 15px;
 }

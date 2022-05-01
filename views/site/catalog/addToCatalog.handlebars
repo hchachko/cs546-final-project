@@ -1,11 +1,10 @@
-{{#if success}}
-<div class="Success"> {{success}} </div>
-{{/if}}
-{{#if error}}
-<div class="Error"> ERROR: {{error}}</div>
-{{/if}}
-
 <form method="POST" action="/catalog/addToCatalog" id="addToCatalogForm">
+    {{#if success}}
+    <div class="Success"> {{success}} </div>
+    {{/if}}
+    {{#if error}}
+    <div class="Error"> ERROR: {{error}}</div>
+    {{/if}}
     <h2>Add Book to Catalog</h2>
     <label id="bookName_label" for="bookName">
         Book Name:

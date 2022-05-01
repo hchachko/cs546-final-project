@@ -1,24 +1,25 @@
 <h2>Hello {{firstName}}! </h1>
 
-{{#if employee}}
-<a href = "/employeeProfile">Back to Employee Profile</a>
-{{else}}
-<a href = "/userProfile">Back to User Profile</a>
-{{/if}}
-<h1>Book Catalog:</h1>
-{{#if success}}
+    {{#if employee}}
+    <a href="/employeeProfile">Back to Employee Profile</a>
+    {{else}}
+    <a href="/userProfile">Back to User Profile</a>
+    {{/if}}
+    <h1>Book Catalog:</h1>
+    {{#if success}}
     <div class="Success"> Success: {{success}} </div>
-{{/if}}
-{{#if error}}
+    {{/if}}
+    {{#if error}}
     <div class="Error"> ERROR: {{error}}</div>
-{{/if}}
+    {{/if}}
 
-<br>
-<br>
-{{#each catalog}}
-    <a class="book" href="/catalog/{{this._id}}">
-        <img alt = "{{this.bookName}}" src = "{{this.image}}">
-        <h3>{{this.bookName}}</h3>
-        <p>Number of copies avaliable: {{this.numCopies}}</p>
-    </a>
-{{/each}}
+    <br>
+    <div class="catalogComponent">
+        {{#each catalog}}
+        <a class="book" href="/catalog/{{this._id}}">
+            <img alt="{{this.bookName}}" src="{{this.image}}">
+            <h3>{{this.bookName}}</h3>
+            <p>Number of copies avaliable: {{this.numCopies}}</p>
+        </a>
+        {{/each}}
+    </div>

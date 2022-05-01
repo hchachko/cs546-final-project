@@ -1,11 +1,11 @@
-{{#if success}}
-<div class="Success"> {{success}} </div>
-{{/if}}
-{{#if error}}
-<div class="Error"> ERROR: {{error}}</div>
-{{/if}}
-
 <form method="POST" action="/menu/addToMenu" id="addToMenuForm">
+    {{#if success}}
+    <div class="Success"> {{success}} </div>
+    {{/if}}
+    {{#if error}}
+    <div class="Error"> ERROR: {{error}}</div>
+    {{/if}}
+
     <h2>Add Item to Menu</h2>
     <label id="itemName_label" for="itemName">
         Item Name:
