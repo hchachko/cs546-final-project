@@ -1,33 +1,46 @@
 <!-- Still a work in progress (Harrison) -->
 <a href="/catalog">Back to Book Catalog</a>
 <h2>{{book.bookName}}</h2>
-<dt><h4>Likes: {{book.likes}} Dislikes: {{book.dislikes}}</h4></dt>
-<img alt = "{{book.bookName}}" src = "{{book.image}}">
+<dt>
+    <h4>Likes: {{book.likes}} Dislikes: {{book.dislikes}}</h4>
+</dt>
+<img alt="{{book.bookName}}" src="{{book.image}}">
 <dl>
-    <dt><h3>Number of copies avaliable: {{book.numCopies}}</h3></dt>
-    <dt><h3>Reviews:</h3></dt>
+    <dt>
+        <h3>Number of copies avaliable: {{book.numCopies}}</h3>
+    </dt>
+    <dt>
+        <h3>Reviews:</h3>
+    </dt>
     <dd>
         {{#if book.reviews}}
-            <dl>
-                {{#each book.reviews}}
-                    <dt>Review from {{this.Reviewer_name}}:</dt>
-                    <dd>Rating: {{this.Rating}}/5 stars</dd>
-                    <dd>{{this.Reviewer_name}} wrote: {{this.Summary}}</dd>
-                    {{#if this.Comments}}
-                        <dd>Comments:</dd>
-                        <dd>
-                            <dl>
-                                {{#each this.Comments}}
-                                    <dd>{{this.Commenter_name}} found this review {{this.Helpful_Review}}! Their comment: {{this.Comment_data}}</dd>
-                                {{/each}}
-                            </dl>
-                        </dd>
-                    {{/if}}
-                    <dd><a href="/bookReviewsComments/{{this._id}}">Would you like to comment?</a></dd>
-                {{/each}}
-            </dl>
+        <dl>
+            {{#each book.reviews}}
+            <div class="reviews">
+                <dt>Review from {{this.Reviewer_name}}:</dt>
+                <dd>Rating: {{this.Rating}}/5 stars</dd>
+                <dd>{{this.Reviewer_name}} wrote: {{this.Summary}}</dd>
+            </div>
+            {{#if this.Comments}}
+            <div class="commentsComponent">
+                <dd>Comments:</dd>
+                <dd>
+                    <dl>
+                        {{#each this.Comments}}
+                        <div class="comments">
+                            <dd>{{this.Commenter_name}} found this review {{this.Helpful_Review}}! Their comment:
+                                {{this.Comment_data}}</dd>
+                        </div>
+                        {{/each}}
+                    </dl>
+                </dd>
+                {{/if}}
+                <dd><a href="/bookReviewsComments/{{this._id}}">Would you like to comment?</a></dd>
+            </div>
+            {{/each}}
+        </dl>
         {{else}}
-            <h5>None yet!</h5>
+        <h5>None yet!</h5>
         {{/if}}
     </dd>
 </dl>

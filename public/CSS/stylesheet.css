@@ -15,6 +15,10 @@ body {
   width: 60%;
 }
 
+.homepage_intro {
+  margin-top: 15px;
+}
+
 input {
   border-radius: 35px;
   border-width: 1;
@@ -228,4 +232,27 @@ h1 {
 
 img {
   margin-bottom: 15px;
+}
+
+/* Item Page */
+.reviews,
+.comments {
+  background-color: #3b555d;
+  padding: 15px 15px;
+  margin: 30px 0;
+  border-radius: 10px;
+  box-shadow: 5px 10px 15px #0000001c;
+  max-width: 70%;
+}
+
+.reviews {
+  margin-top: 55px;
+}
+.reviewsHeadline {
+  margin: 15px 0;
+}
+
+.commentsComponent {
+  margin-left: 45px;
+  margin-bottom: 55px;
 }
