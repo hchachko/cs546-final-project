@@ -6,19 +6,20 @@
 {{/if}}
 
 <form method="POST" action="/menu/addToMenu" id="addToMenuForm">
-	<label id = "itemName_label" for="itemName">
+    <h2>Add Item to Menu</h2>
+    <label id="itemName_label" for="itemName">
         Item Name:
-        <input name="itemName" type="text" id="itemName"/>
+        <input name="itemName" type="text" id="itemName" />
     </label>
-    <label id = "price_label" for="price">
+    <label id="price_label" for="price">
         Price:
-        <input name="price" type="text" id="price"/>
+        <input name="price" type="text" id="price" />
     </label>
-    <label id = "image_label" for="image">
+    <label id="image_label" for="image">
         Image URL:
-        <input name="image" type="text" id="image"/>
+        <input name="image" type="text" id="image" />
     </label>
-	<button type="submit">Submit</button>
+    <button type="submit">Submit</button>
 </form>
 
 <a href="/employeeProfile">Back to Employee Profile</a>

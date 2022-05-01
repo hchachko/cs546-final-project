@@ -20,7 +20,6 @@ input {
   border-width: 1;
   border-style: solid;
   border-color: #955f31;
-
   width: 100%;
   margin-top: 8px;
   margin-bottom: 15px;
@@ -67,7 +66,16 @@ label {
   width: 100%;
   padding: 10px;
   color: white;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.Success {
+  background-color: #2c534f;
+  width: 100%;
+  padding: 10px;
+  color: white;
+  margin-bottom: 15px;
   border-radius: 4px;
 }
 
@@ -128,6 +136,26 @@ button:focus {
   border-style: solid;
   border-color: #955f31;
 }
+
+/* Add to Menu/Catalog Forms */
+#addToMenuForm,
+#addToCatalogForm,
+#createSchedule,
+#reserveSeat {
+  width: 500px;
+  margin: auto;
+  margin-top: 35px;
+  margin-bottom: 55px;
+  padding: 30px 25px;
+  border-radius: 35px;
+  background-color: #3b555d;
+  box-shadow: 5px 10px 40px #000000;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
 /* Seat Reservation */
 .week {
   display: inline-flex;
@@ -142,15 +170,34 @@ button:focus {
   padding: 10px;
 }
 
+.dayName {
+  text-transform: uppercase;
+}
+
+#hourLabel,
+#dayLabel {
+  margin-bottom: 20px;
+}
+
 .hour {
-  background-color: rgb(243, 243, 243);
+  background-color: #3b555d;
   padding: 5px 15px;
   margin: 10px;
   border-radius: 10px;
+  border-width: 1;
+  border-style: solid;
+  border-color: #3b555d;
+}
+
+.hour:hover {
+  border-width: 1;
+  border-style: solid;
+  border-color: #955f31;
 }
 
 h3 {
   font-size: 20px;
+  margin-bottom: 0;
 }
 
 .faded {

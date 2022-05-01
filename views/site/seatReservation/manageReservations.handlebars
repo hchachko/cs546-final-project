@@ -1,12 +1,12 @@
-{{#if success}}
-<div class="Success"> {{success}} </div>
-{{/if}}
-{{#if error}}
-<div class="Error"> ERROR: {{error}}</div>
-{{/if}}
-
-<h2>Manage Reservations</h2>
 <form method="POST" action="/seats/createSchedule" id="createSchedule">
+    {{#if success}}
+    <div class="Success"> {{success}} </div>
+    {{/if}}
+    {{#if error}}
+    <div class="Error"> ERROR: {{error}}</div>
+    {{/if}}
+
+    <h2>Manage Reservations</h2>
     <label id="dayLabel" for="day">
         Choose the day you wish to add:
         <select name="day" id="day">
@@ -26,10 +26,12 @@
     <button type="submit">Submit</button>
 </form>
 
+<h2>Available Seats This Week</h2>
 <div class="week">
+
     {{#each seats}}
     <div class="day">
-        <h1 class="dayName">{{this.name}}</h1>
+        <h2 class="dayName">{{this.name}}</h2>
         <div class="hour">
             <h3>8 AM <span class="faded">{{this.8am}} seats</span></h3>
         </div>
