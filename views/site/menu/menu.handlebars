@@ -1,31 +1,29 @@
-<h2>Hello {{firstName}}! </h1>
-
 {{#if employee}}
-<a href = "/employeeProfile">Back to Employee Profile</a>
+<a href="/employeeProfile">❮ Back to Employee Profile</a>
 {{else}}
-<a href = "/userProfile">Back to User Profile</a>
+<a href="/userProfile">❮ Back to User Profile</a>
 {{/if}}
 <h1>Menu:</h1>
 {{#if success}}
-    <div class="Success"> Success: {{success}} </div>
+<div class="Success"> Success: {{success}} </div>
 {{/if}}
 {{#if error}}
-    <div class="Error"> ERROR: {{error}}</div>
+<div class="Error"> ERROR: {{error}}</div>
 {{/if}}
 
-<br>
-<br>
-{{#each menu}}
+
+<div class="menuComponent">
+    {{#each menu}}
     <a class="menuItem" href="/menu/{{this._id}}">
-        <img alt = "{{this.itemName}}" src = "{{this.image}}">
+        <img alt="{{this.itemName}}" src="{{this.image}}">
         <h3>{{this.itemName}}</h3>
         <p>{{this.price}}</p>
-    </a>
         <form method="POST" action="/menu/addFavDrink" id="addFavDrinkForm">
             <input type="hidden" name="itemId" value="{{this._id}}">
-            <input type ="hidden" name="category" value="{{this.category}}">
-            <input type ="hidden" name="itemName" value="{{this.itemName}}">
-            <button type="submit">Add to Favorites</button>
+            <input type="hidden" name="category" value="{{this.category}}">
+            <input type="hidden" name="itemName" value="{{this.itemName}}">
+            <button type="submit">♡ Add to Favorites</button>
         </form>
-       
-{{/each}}
+    </a>
+    {{/each}}
+</div>
