@@ -20,6 +20,7 @@ module.exports = {
   users: getCollectionFn("users"),
   menu: getCollectionFn("menu"),
   catalog: getCollectionFn("catalog"),
+  cart: getCollectionFn("cart"),
   favoriteBooksOrDrinks: getCollectionFn("favoriteBooksOrDrinks"),
   seats: getCollectionFn("seats")
 };

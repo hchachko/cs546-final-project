@@ -31,3 +31,29 @@
     </dd>
 </dl>
 <a href="/productReviews/{{menuItem._id}}">Would you like to write a review?</a>
+<br />
+<br />
+{{#if success}}
+<div class="Success"> {{success}} </div>
+{{/if}}
+{{#if error}}
+<div class="Error"> ERROR: {{error}}</div>
+{{/if}}
+<br />
+<h3>Order Now!</h3>
+<form method="POST" action="/checkout/addToCart" id="checkoutForm">
+  <label id = "time_label" for="time">
+      Pick Up Time:
+      <input name="time" type="time" id="time"/>
+  </label>
+    <label id = "note_label" for="note">
+        Notes (optional):
+        <input name="note" type="text" id="note"/>
+    </label>
+
+        <input type="hidden" name="itemId" type="text" id="itemId" value="{{menuItem.itemName}}"/>
+        <input type="hidden" name="userId" type="userId" id="userId" value="{{userId}}"/>
+	<button type="submit">Place your order</button>
+</form>
+<br />
+<a href="/employeeProfile">Back to Employee Profile</a>
