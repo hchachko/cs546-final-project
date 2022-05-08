@@ -14,8 +14,6 @@ router.post("/addToCart", async (req, res) => {
     const min = time[3]+time[4];
     const userId = req.body.userId;
     const currentTime = new Date();
-
-
     if (
       itemId == undefined ||
       note == undefined ||

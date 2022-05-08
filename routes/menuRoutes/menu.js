@@ -102,14 +102,14 @@ router.post("/addToMenu", async (req, res) => {
       const price = req.body.price;
       const image = req.body.image;
       if (itemName == undefined || price == undefined || image == undefined) {
-        throw "itemName, price, category, and image must be provided";
+        throw "itemName, price, image must be provided";
       }
       if (
         typeof itemName != "string" ||
         typeof price != "string" ||
         typeof image != "string"
       ) {
-        throw "itemName/price/category/image must be a valid string";
+        throw "itemName/price/image must be a valid string";
       }
       if (
         itemName.trim().length == 0 ||

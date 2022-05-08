@@ -48,7 +48,7 @@ router.post("/:id", async (req, res) => {
       let rating = parseInt(reviewRating);
       if (typeof rating != "number") throw "Detected non-number input";
       if (!Number.isInteger(rating)) throw "Detected non-integer input";
-      if (!(1 <= rating && rating <=5)) "Review rating out of range";
+      if (!(1 <= rating && rating <= 5)) throw "Review rating out of range";
       if (reviewDesc.trim().length == 0) throw "Detected empty review";
       const review = await reviewData.create(req.params.id, req.session.user.firstName, likeDislike, rating, reviewDesc);
       res.render("site/menu/productReview", { menuItem: menuItem, posted: true });
