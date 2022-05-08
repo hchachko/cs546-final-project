@@ -52,4 +52,16 @@ module.exports = {
     menuItem["_id"] = menuItem["_id"].toString();
     return menuItem;
   },
+  sortByMostLiked: async (menu) => {
+    if (menu.isArray == false) throw "Menu must be an array";
+    //Sorting technique inspired from: https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
+    const sortedMenu = menu.sort((x,y) => (x.likes <= y.likes) ? 1 : -1);
+    return sortedMenu;
+  },
+  sortByMostDisliked: async (menu) => {
+    if (menu.isArray == false) throw "Menu must be an array";
+    //Sorting technique inspired from: https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
+    const sortedMenu = menu.sort((x,y) => (x.dislikes <= y.dislikes) ? 1 : -1);
+    return sortedMenu;
+  }
 };

@@ -20,22 +20,23 @@
                 <dt>Review from {{this.Reviewer_name}}:</dt>
                 <dd>Rating: {{this.Rating}}/5 stars</dd>
                 <dd>{{this.Reviewer_name}} wrote: {{this.Summary}}</dd>
-            </div>
-            {{#if this.Comments}}
-            <div class="commentsComponent">
-                <dd>Comments:</dd>
-                <dd>
-                    <dl>
-                        {{#each this.Comments}}
-                        <div class="comments">
-                            <dd>{{this.Commenter_name}} found this review {{this.Helpful_Review}}! Their comment:
-                                {{this.Comment_data}}</dd>
-                        </div>
-                        {{/each}}
-                    </dl>
-                </dd>
-                {{/if}}
-                <dd><a href="/bookReviewsComments/{{this._id}}">Would you like to comment?</a></dd>
+
+                {{#if this.Comments}}
+                <div class="commentsComponent">
+                    <dd>Comments:</dd>
+                    <dd>
+                        <dl>
+                            {{#each this.Comments}}
+                            <div class="comments">
+                                <dd>{{this.Commenter_name}} found this review {{this.Helpful_Review}}! Their comment:
+                                    {{this.Comment_data}}</dd>
+                            </div>
+                            {{/each}}
+                        </dl>
+                    </dd>
+                    {{/if}}
+                    <dd><a href="/bookReviewsComments/{{this._id}}">Would you like to comment?</a></dd>
+                </div>
             </div>
             {{/each}}
         </dl>

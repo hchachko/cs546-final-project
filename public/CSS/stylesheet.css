@@ -85,11 +85,12 @@ label {
 
 a {
   color: white;
+  text-decoration: underline;
 }
 
 a:hover {
-  color: white;
-  text-decoration: none;
+  color:  #9e6f46;
+  text-decoration: underline;
 }
 
 input:focus,

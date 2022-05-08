@@ -10,7 +10,9 @@
 {{#if error}}
 <div class="Error"> ERROR: {{error}}</div>
 {{/if}}
-
+<a href="/catalog"><p>Default sorting</p></a>
+<a href="/catalog/mostLiked"><p>Sort by most liked</p></a>
+<a href="/catalog/mostDisliked"><p>Sort by most disliked</p></a>
 <br>
 <div class="catalogComponent">
     {{#each catalog}}

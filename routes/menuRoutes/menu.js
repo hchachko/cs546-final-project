@@ -28,6 +28,58 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/mostLiked", async (req, res) => {
+  if (req.session.user) {
+    try {
+      const menu = await menuData.getAll();
+      if (menu.isArray == false) throw "Menu must be an array";
+      const sortedMenu = await menuData.sortByMostLiked(menu);
+      if (req.session.user.employee == "on") {
+        res.render("site/menu/menu", {
+          firstName: req.session.user.firstName,
+          menu: sortedMenu,
+          employee: req.session.user.employee,
+        });
+      } else {
+        res.render("site/menu/menu", {
+          firstName: req.session.user.firstName,
+          menu: sortedMenu,
+        });
+      }
+    } catch (e) {
+      res.status(400).render("site/homepage", { error: e });
+    }
+  } else {
+    res.redirect("/");
+  }
+});
+
+router.get("/mostDisLiked", async (req, res) => {
+  if (req.session.user) {
+    try {
+      const menu = await menuData.getAll();
+      if (menu.isArray == false) throw "Menu must be an array";
+      const sortedMenu = await menuData.sortByMostDisliked(menu);
+      if (req.session.user.employee == "on") {
+        res.render("site/menu/menu", {
+          firstName: req.session.user.firstName,
+          menu: sortedMenu,
+          employee: req.session.user.employee,
+        });
+      } else {
+        res.render("site/menu/menu", {
+          firstName: req.session.user.firstName,
+          menu: sortedMenu,
+        });
+      }
+    } catch (e) {
+      res.status(400).render("site/homepage", { error: e });
+    }
+  } else {
+    res.redirect("/");
+  }
+});
+
 router.get("/addToMenu", async (req, res) => {
   if (req.session.user.employee == "on") {
     try {

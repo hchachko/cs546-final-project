@@ -20,25 +20,25 @@
                 <dt>Review from {{this.Reviewer_name}}:</dt>
                 <dd>Rating: {{this.Rating}}/5 stars</dd>
                 <dd>{{this.Reviewer_name}} wrote: {{this.Summary}}</dd>
-            </div>
-            {{#if this.Comments}}
+                {{#if this.Comments}}
 
-            <div class="commentsComponent">
-                <dd>Comments:</dd>
-                <dd>
-                    <dl>
-                        {{#each this.Comments}}
-                        <div class="comments">
-                            <dd>{{this.Commenter_name}} found this review {{this.Helpful_Review}}! Their comment:
-                                {{this.Comment_data}}</dd>
-                        </div>
-                        {{/each}}
-                    </dl>
-                </dd>
+                <div class="commentsComponent">
+                    <dd>Comments:</dd>
+                    <dd>
+                        <dl>
+                            {{#each this.Comments}}
+                            <div class="comments">
+                                <dd>{{this.Commenter_name}} found this review {{this.Helpful_Review}}! Their comment:
+                                    {{this.Comment_data}}</dd>
+                            </div>
+                            {{/each}}
+                        </dl>
+                    </dd>
 
 
-                {{/if}}
-                <dd><a href="/productReviewsComments/{{this._id}}">Would you like to comment?</a></dd>
+                    {{/if}}
+                    <dd><a href="/productReviewsComments/{{this._id}}">Would you like to comment?</a></dd>
+                </div>
             </div>
             {{/each}}
 
@@ -61,7 +61,7 @@
 <h3>Order Now!</h3>
 <form method="POST" action="/checkout/addToCart" id="checkoutForm">
   <label id = "time_label" for="time">
-      Pick Up Time:
+      Pick Up Time (Ex. 12:00:PM):
       <input name="time" type="time" id="time"/>
   </label>
     <label id = "note_label" for="note">
@@ -73,5 +73,3 @@
         <input type="hidden" name="userId" type="userId" id="userId" value="{{userId}}"/>
 	<button type="submit">Place your order</button>
 </form>
-<br />
-<a href="/employeeProfile">Back to Employee Profile</a>

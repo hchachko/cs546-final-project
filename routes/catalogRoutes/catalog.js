@@ -28,6 +28,58 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/mostLiked", async (req, res) => {
+  if (req.session.user) {
+    try {
+      const catalog = await catalogData.getAll();
+      if (catalog.isArray == false) throw "Catalog must be an array";
+      const sortedCatalog = await catalogData.sortByMostLiked(catalog);
+      if (req.session.user.employee == "on") {
+        res.render("site/catalog/catalog", {
+          firstName: req.session.user.firstName,
+          catalog: sortedCatalog,
+          employee: req.session.user.employee,
+        });
+      } else {
+        res.render("site/catalog/catalog", {
+          firstName: req.session.user.firstName,
+          catalog: sortedCatalog,
+        });
+      }
+    } catch (e) {
+      res.status(400).render("site/homepage", { error: e });
+    }
+  } else {
+    res.redirect("/");
+  }
+});
+
+router.get("/mostDisliked", async (req, res) => {
+  if (req.session.user) {
+    try {
+      const catalog = await catalogData.getAll();
+      if (catalog.isArray == false) throw "Catalog must be an array";
+      const sortedCatalog = await catalogData.sortByMostDisliked(catalog);
+      if (req.session.user.employee == "on") {
+        res.render("site/catalog/catalog", {
+          firstName: req.session.user.firstName,
+          catalog: sortedCatalog,
+          employee: req.session.user.employee,
+        });
+      } else {
+        res.render("site/catalog/catalog", {
+          firstName: req.session.user.firstName,
+          catalog: sortedCatalog,
+        });
+      }
+    } catch (e) {
+      res.status(400).render("site/homepage", { error: e });
+    }
+  } else {
+    res.redirect("/");
+  }
+});
+
 router.get("/addToCatalog", async (req, res) => {
   if (req.session.user.employee == "on") {
     try {

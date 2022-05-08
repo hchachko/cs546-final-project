@@ -10,8 +10,9 @@
 {{#if error}}
 <div class="Error"> ERROR: {{error}}</div>
 {{/if}}
-
-
+<a href="/menu"><p>Default sorting</p></a>
+<a href="/menu/mostLiked"><p>Sort by most liked</p></a>
+<a href="/menu/mostDisliked"><p>Sort by most disliked</p></a>
 <div class="menuComponent">
     {{#each menu}}
     <a class="menuItem" href="/menu/{{this._id}}">

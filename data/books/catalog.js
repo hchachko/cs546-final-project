@@ -57,4 +57,16 @@ module.exports = {
     catalogItem["_id"] = catalogItem["_id"].toString();
     return catalogItem;
   },
+  sortByMostLiked: async (catalog) => {
+    if (catalog.isArray == false) throw "Catalog must be an array";
+    //Sorting technique inspired from: https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
+    const sortedCatalog = catalog.sort((x,y) => (x.likes <= y.likes) ? 1 : -1);
+    return sortedCatalog;
+  },
+  sortByMostDisliked: async (catalog) => {
+    if (catalog.isArray == false) throw "Catalog must be an array";
+    //Sorting technique inspired from: https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
+    const sortedCatalog = catalog.sort((x,y) => (x.dislikes <= y.dislikes) ? 1 : -1);
+    return sortedCatalog;
+  }
 };
