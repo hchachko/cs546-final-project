@@ -1,11 +1,12 @@
+<div class = "addToMenu">
 <form method="POST" action="/menu/addToMenu" id="addToMenuForm">
     {{#if success}}
     <div class="Success"> {{success}} </div>
     {{/if}}
     {{#if error}}
-    <div class="Error"> ERROR: {{error}}</div>
+    <div id="Error"> ERROR: {{error}}</div>
     {{/if}}
-    <div id="Error" class="Error" hidden> Error</div>
+    <div id="Error_1" class="Error"></div>
     <h2>Add Item to Menu</h2>
     <label id="itemName_label" for="itemName">
         Item Name:
@@ -19,7 +20,9 @@
         Image URL:
         <input name="image" type="text" id="image" />
     </label>
-    <button type="submit">Submit</button>
+    <button type="submit" id = "drinkSubmitButton">Submit</button>
+    <div id = "new-drink-added"></div>
 </form>
+</div>
 
 <a href="/employeeProfile">Back to Employee Profile</a>

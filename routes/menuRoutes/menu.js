@@ -4,6 +4,7 @@ const menuData = require("../../data/products/menu");
 const catalogData = require("../../data/books/catalog");
 const favoriteBooksOrDrinks = require("../../data/favoriteBookOrDrink");
 let { ObjectId } = require("mongodb");
+const xss = require("xss");
 
 router.get("/", async (req, res) => {
   if (req.session.user) {
@@ -119,7 +120,11 @@ router.post("/addToMenu", async (req, res) => {
         throw "Input(s) must not be empty";
       }
 
-      const addedMenuItem = await menuData.createItem(itemName, price, image);
+      const addedMenuItem = await menuData.createItem(
+        xss(itemName),
+        price,
+        xss(image)
+      );
       res.render("site/menu/addToMenu", {
         success: "Item added to menu Successfully.",
       });

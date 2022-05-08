@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const userData = require("../data/users");
+const xss = require("xss");
 
 router.get("/", (req, res) => {
   if (req.session.user && req.session.user.employee == "on") {
@@ -71,22 +72,22 @@ router.post("/signup", async (req, res) => {
     ) {
       throw "first name/last name/email/password must not be empty";
     }
-    for (let i = 0; i < firstName.length; i++) {
-        if (
-          !(firstName.charAt(i) > 64 && firstName.charAt(i) < 91) &&
-          !(firstName.charAt(i) > 96 && firstName.charAt(i) < 123)
-        ) {
-          throw "you must provide a valid first name";
-        }
-    }
-    for (let i = 0; i < lastName.length; i++) {
-      if (
-        !(lastName.charAt(i) > 64 && lastName.charAt(i) < 91) &&
-        !(lastName.charAt(i) > 96 && lastName.charAt(i) < 123)
-      ) {
-        throw "you must provide a valid last name";
-      }
-  }
+    // for (let i = 0; i < firstName.length; i++) {
+    //     if (
+    //       !(firstName.charAt(i) > 64 && firstName.charAt(i) < 91) &&
+    //       !(firstName.charAt(i) > 96 && firstName.charAt(i) < 123)
+    //     ) {
+    //       throw "you must provide a valid first name";
+    //     }
+    // }
+    //   for (let i = 0; i < lastName.length; i++) {
+    //     if (
+    //       !(lastName.charAt(i) > 64 && lastName.charAt(i) < 91) &&
+    //       !(lastName.charAt(i) > 96 && lastName.charAt(i) < 123)
+    //     ) {
+    //       throw "you must provide a valid last name";
+    //     }
+    // }
     if (firstName.length < 1 || lastName.length < 1) {
       throw "first name/last name must be 1 character long or more";
     }
@@ -168,7 +169,7 @@ router.post("/homepage", async (req, res) => {
         throw "password cannot have spaces";
       }
     }
-    const checkUser = await userData.checkUser(email, password);
+    const checkUser = await userData.checkUser(xss(email), password);
     if (checkUser.authenticated == true) {
       const firstName = checkUser.firstName;
       const lastName = checkUser.lastName;
