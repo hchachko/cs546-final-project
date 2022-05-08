@@ -55,7 +55,7 @@ module.exports = {
             { _id: ObjectId(productId) },
             { $set: product }
         );
-        if (updatedInfo.modifiedCount === 0) throw "Could not update band successfully";
+        if (updatedInfo.modifiedCount === 0) throw "Could not update product successfully";
         return review;
     }
 }

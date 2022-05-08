@@ -1,5 +1,5 @@
 const mongoCollections = require('../../config/mongoCollections');
-const menu = mongoCollections.menu;
+const catalog = mongoCollections.catalog;
 let { ObjectId } = require('mongodb');
 
 module.exports = {
@@ -12,15 +12,15 @@ module.exports = {
         if (reviewId.length == 0 || commenterName.length == 0 || commentData.length == 0) throw "Detected empty string input(s)";
         if (helpfulReview != "helpful" && helpfulReview != "unhelpful") throw "Unexpected value from dropdown";
         if (!ObjectId.isValid(reviewId)) throw "Detected invalid reviewId";
-        const menuCollection = await menu();
-        const product = await menuCollection.find({"reviews._id": ObjectId(reviewId)}).toArray();
-        if (!product) throw "Product not found";
+        const catalogCollection = await catalog();
+        const book = await catalogCollection.find({"reviews._id": ObjectId(reviewId)}).toArray();
+        if (!book) throw "Book not found";
         let review;
-        for (let x of product[0].reviews) {
+        for (let x of book[0].reviews) {
             if (x['_id'] == reviewId) review = x;
         }
         if (!review) throw "Review not found";
-        let filteredReviews = product[0].reviews.filter(removeOldReview);
+        let filteredReviews = book[0].reviews.filter(removeOldReview);
         function removeOldReview(elem){
             if (elem['_id'] != reviewId) return elem;
         }
@@ -33,12 +33,12 @@ module.exports = {
         }
         review.Comments.push(comment);
         filteredReviews.push(review);
-        product[0].reviews=filteredReviews;
-        const updatedInfo = await menuCollection.updateOne(
-            { _id: ObjectId(product[0]._id)},
-            { $set: product[0] }
+        book[0].reviews=filteredReviews;
+        const updatedInfo = await catalogCollection.updateOne(
+            { _id: ObjectId(book[0]._id)},
+            { $set: book[0] }
         );
-        if (updatedInfo.modifiedCount === 0) throw "Could not update product successfully";
+        if (updatedInfo.modifiedCount === 0) throw "Could not update book successfully";
         return comment;
     }
 }

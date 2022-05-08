@@ -1,10 +1,9 @@
 {{#if posted}}
 <h4>Comment posted successfully!</h4>
-<a href="/menu">Go back to menu</a>
+<a href="/catalog">Go back to Catalog</a>
 {{else}}
-<a href="/menu">Cancel Comment and go back to menu</a>
+<a href="/catalog">Cancel Comment and go back to Catalog</a>
 <div class="review-comment-page">
-
     <h4>Review Posted by {{review.Reviewer_name}}:</h4>
     <dl>
         <dt>Their Rating:</dt>
@@ -13,10 +12,8 @@
         <dd>{{review.Summary}}</dd>
     </dl>
 </div>
-<form method="POST" action="/productReviewsComments/{{review._id}}" id="comment-form">
-    {{#if error}}
-    <div class="Error"> ERROR: {{error}}</div>
-    {{/if}}
+
+<form method="POST" action="/bookReviewsComments/{{review._id}}" id="comment-form">
     <label id="helpfulReveiw_label" for="helpfulReview">
         Did you find this review helpful?
         <select name="helpfulReview" id="helpfulReview">
@@ -33,5 +30,7 @@
 
     <button type="submit">Post</button>
 </form>
-
+{{#if error}}
+<div class="Error"> ERROR: {{error}}</div>
+{{/if}}
 {{/if}}

@@ -1,12 +1,12 @@
-{{#if success}}
-<div class="Success"> {{success}} </div>
-{{/if}}
-{{#if error}}
-<div class="Error"> ERROR: {{error}}</div>
-{{/if}}
-
-<h2>Reserve a Seat</h2>
 <form method="POST" action="/seats/reserveSeat" id="reserveSeat">
+    {{#if success}}
+    <div class="Success"> {{success}} </div>
+    {{/if}}
+    {{#if error}}
+    <div class="Error"> ERROR: {{error}}</div>
+    {{/if}}
+
+    <h2>Reserve a Seat</h2>
     <label id="dayLabel" for="day">
         Choose the day:
         <select name="day" id="day">
@@ -43,10 +43,12 @@
     <button type="submit">Reserve</button>
 </form>
 
+<h2>Available Seats This Week</h2>
+
 <div class="week">
     {{#each seats}}
     <div class="day">
-        <h1 class="dayName">{{this.name}}</h1>
+        <h2 class="dayName">{{this.name}}</h2>
         <div class="hour">
             <h3>8 AM <span class="faded">{{this.8am}} seats</span></h3>
         </div>
