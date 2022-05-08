@@ -3,6 +3,7 @@ const router = express.Router();
 const cartData = require("../../data/products/CartItem");
 const favoriteBooksOrDrinks = require("../../data/favoriteBookOrDrink");
 let { ObjectId } = require("mongodb");
+const xss = require("xss");
 
 router.post("/addToCart", async (req, res) => {
   try {
@@ -10,8 +11,8 @@ router.post("/addToCart", async (req, res) => {
     const itemId = req.body.itemId;
     const note = req.body.note;
     const time = req.body.time;
-    const hour = time[0]+time[1];
-    const min = time[3]+time[4];
+    const hour = time[0] + time[1];
+    const min = time[3] + time[4];
     const userId = req.body.userId;
     const currentTime = new Date();
     if (
@@ -39,20 +40,19 @@ router.post("/addToCart", async (req, res) => {
       throw "Input(s) must not be empty, besides notes";
     }
     //Make sure time is after "now"
-    if (currentTime.getHours() >= parseInt(hour)){
-      throw "Time is too early"
-  }
-    if (currentTime.getHours() >= parseInt(hour)){
-      if(currentTime.getMinutes() > parseInt(min)){
-      throw "Time is too early"
+    if (currentTime.getHours() >= parseInt(hour)) {
+      throw "Time is too early";
     }
-  }
-
+    if (currentTime.getHours() >= parseInt(hour)) {
+      if (currentTime.getMinutes() > parseInt(min)) {
+        throw "Time is too early";
+      }
+    }
 
     const addedCartItem = await cartData.addToCart(
       itemId,
       userId,
-      note,
+      xss(note),
       time
     );
     res.render("site/menu/addToCart", {
@@ -61,8 +61,6 @@ router.post("/addToCart", async (req, res) => {
   } catch (e) {
     res.status(400).render("site/menu/addToCart", { error: e });
   }
-}
-);
-
+});
 
 module.exports = router;

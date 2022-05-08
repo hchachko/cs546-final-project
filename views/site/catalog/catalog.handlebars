@@ -20,13 +20,16 @@
         <img alt="{{this.bookName}}" src="{{this.image}}">
         <h3>{{this.bookName}}</h3>
         <p>Number of copies avaliable: {{this.numCopies}}</p>
-        <form method="POST" action="/menu/addFavBook" id="addFavBookForm">
-            <input type="hidden" id= "itemId" name="itemId" value="{{this._id}}">
-            <input type="hidden" id = "genre" name="genre" value="{{this.genre}}">
-            <input type="hidden" id = "itemName" name="itemName" value="{{this.bookName}}">
-            <input type="hidden" id = "image" name="image" value="{{this.image}}">
-            <button type="submit">♡ Add to Favorites</button>
-        </form>
+
+        <div id="new-content">
+            <form method="POST" action="/menu/addFavBook" id="addFavBookForm">
+                <input type="hidden" name="itemId" value="{{this._id}}">
+                <input type="hidden" name="genre" value="{{this.genre}}">
+                <input type="hidden" name="itemName" value="{{this.bookName}}">
+                <input type="hidden" name="image" value="{{this.image}}">
+                <button type="submit">♡ Add to Favorites</button>
+            </form>
+        </div>
     </a>
     <div id="Error" class="Error" hidden> Error</div> 
     {{/each}}

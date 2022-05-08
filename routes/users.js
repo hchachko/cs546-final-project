@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const userData = require("../data/users");
+const xss = require("xss");
 
 router.get("/", (req, res) => {
   if (req.session.user && req.session.user.employee == "on") {
@@ -72,12 +73,12 @@ router.post("/signup", async (req, res) => {
       throw "first name/last name/email/password must not be empty";
     }
     for (let i = 0; i < firstName.length; i++) {
-        if (
-          !(firstName.charCodeAt(i) > 64 && firstName.charCodeAt(i) < 91) &&
-          !(firstName.charCodeAt(i) > 96 && firstName.charCodeAt(i) < 123)
-        ) {
-          throw "you must provide a valid first name";
-        }
+      if (
+        !(firstName.charCodeAt(i) > 64 && firstName.charCodeAt(i) < 91) &&
+        !(firstName.charCodeAt(i) > 96 && firstName.charCodeAt(i) < 123)
+      ) {
+        throw "you must provide a valid first name";
+      }
     }
     for (let i = 0; i < lastName.length; i++) {
       if (
@@ -168,7 +169,7 @@ router.post("/homepage", async (req, res) => {
         throw "password cannot have spaces";
       }
     }
-    const checkUser = await userData.checkUser(email, password);
+    const checkUser = await userData.checkUser(xss(email), password);
     if (checkUser.authenticated == true) {
       const firstName = checkUser.firstName;
       const lastName = checkUser.lastName;

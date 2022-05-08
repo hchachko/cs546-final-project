@@ -5,7 +5,7 @@
     {{#if error}}
     <div class="Error"> ERROR: {{error}}</div>
     {{/if}}
-    <div id="Error" class="Error" hidden> Error</div>
+    <div id="Error_2" class="Error"> Error</div>
     <h2>Add Book to Catalog</h2>
     <label id="bookName_label" for="bookName">
         Book Name:
@@ -23,7 +23,8 @@
         Image URL:
         <input name="image" type="text" id="image" />
     </label>
-    <button type="submit">Submit</button>
+    <button type="submit" id = "catalogSubmitButton">Submit</button>
+    <div id = "new-catalog-added"></div>
 </form>
 
 <a href="/employeeProfile">Back to Employee Profile</a>
