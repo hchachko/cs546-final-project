@@ -17,7 +17,6 @@ router.get("/", async (req, res) => {
         });
       } else {
         res.render("site/favorites", {
-          employee: true,
           favoriteDrinks: favoriteDrinks,
           favoriteBooks: favorites.favoriteBooks,
         });

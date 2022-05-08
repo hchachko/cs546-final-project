@@ -86,7 +86,7 @@ router.post("/signup", async (req, res) => {
       ) {
         throw "you must provide a valid last name";
       }
-  }
+    }
     if (firstName.length < 1 || lastName.length < 1) {
       throw "first name/last name must be 1 character long or more";
     }
