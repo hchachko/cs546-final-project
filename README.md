@@ -17,7 +17,7 @@ A web application that will serve as the main portal for JavaReads-Cafe, a Hobok
 - A non-authenticated user will only be able to view general information about the cafe. 
 - Once logged in as an employee, the user will be able to add items to the menu and the book catalog. In addition, the employee will be able to open available seats at the cafe for each day of the week so that customers can reserve their preferred time slots. 
 - The employee user will also have access to some features available to the customer user such as viewing the menu and book catalog. 
-- As a customer, the user will be able to view the menu and book catalog of the cafe, make a reservation, order a drink, and reserve a book. The user can also write reviews under each menu and book item as well as comment on other users' reviews. 
+- As a customer, the user will be able to view the menu and book catalog of the cafe, make a reservation, order a drink, and view number of copies of books held at the cafe. The user can also write reviews under each menu and book item as well as comment on other users' reviews. 
 
 ## GitHub Repo Link
 https://github.com/hchachko/cs546-final-project
