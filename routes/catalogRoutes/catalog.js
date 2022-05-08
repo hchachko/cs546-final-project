@@ -106,7 +106,7 @@ router.post("/addToCatalog", async (req, res) => {
       let numCopiesConverted = parseInt(numCopies);
       if (typeof numCopiesConverted != "number") throw "Detected non-number input";
       if (!Number.isInteger(numCopiesConverted)) throw "Detected non-integer input";
-      if (numCopiesConverted < 1) "numCopies rating out of range";
+      if (numCopiesConverted < 1) "numCopies out of range";
       if (bookName.trim().length == 0 || genre.trim().length == 0 || image.trim().length == 0) throw "Detected empty string input(s)";
       const addedBook = await catalogData.createItem(bookName, numCopiesConverted, genre, image);
       res.render("site/catalog/addToCatalog", {

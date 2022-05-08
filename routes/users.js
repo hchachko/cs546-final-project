@@ -72,24 +72,21 @@ router.post("/signup", async (req, res) => {
       throw "first name/last name/email/password must not be empty";
     }
     for (let i = 0; i < firstName.length; i++) {
-      if (
-        //check if the character is alpha numeric: https://stackoverflow.com/questions/4434076/best-way-to-alphanumeric-check-in-javascript
-        firstName.charAt(i) > 47 &&
-        firstName.charAt(i) < 58 &&
-        firstName.charAt(i) > 64 &&
-        firstName.charAt(i) < 91 &&
-        firstName.charAt(i) > 96 &&
-        firstName.charAt(i) < 123 &&
-        lastName.charAt(i) > 47 &&
-        lastName.charAt(i) < 58 &&
-        lastName.charAt(i) > 64 &&
-        lastName.charAt(i) < 91 &&
-        lastName.charAt(i) > 96 &&
-        lastName.charAt(i) < 123
-      ) {
-        throw "first name/last name must be valid.";
-      }
+        if (
+          !(firstName.charAt(i) > 64 && firstName.charAt(i) < 91) &&
+          !(firstName.charAt(i) > 96 && firstName.charAt(i) < 123)
+        ) {
+          throw "you must provide a valid first name";
+        }
     }
+    for (let i = 0; i < lastName.length; i++) {
+      if (
+        !(lastName.charAt(i) > 64 && lastName.charAt(i) < 91) &&
+        !(lastName.charAt(i) > 96 && lastName.charAt(i) < 123)
+      ) {
+        throw "you must provide a valid last name";
+      }
+  }
     if (firstName.length < 1 || lastName.length < 1) {
       throw "first name/last name must be 1 character long or more";
     }
@@ -142,14 +139,35 @@ router.post("/homepage", async (req, res) => {
     if (email.trim().length == 0) {
       throw "email must not be empty";
     }
-
+    if (email.indexOf(".") == -1) {
+      throw "email must be a valid email address.";
+    }
+    const ext = email.slice(email.lastIndexOf(".") + 1);
+    if (ext.length < 2) {
+      throw "email must be a valid email address.";
+    } else {
+      for (let i = 0; i < ext.length; i++) {
+        if (/[a-zA-Z]/.test(ext[i])) {
+          continue;
+        } else {
+          throw "email must be a valid email address.";
+        }
+      }
+    }
     if (typeof password != "string") {
       throw "password must be a valid string";
     }
     if (password.trim().length == 0) {
       throw "password must not be empty";
     }
-
+    if (password.length < 6) {
+      throw "password must be at least 6 characters";
+    }
+    for (let i = 0; i < password.length; i++) {
+      if (password.charAt(i) == " ") {
+        throw "password cannot have spaces";
+      }
+    }
     const checkUser = await userData.checkUser(email, password);
     if (checkUser.authenticated == true) {
       const firstName = checkUser.firstName;
