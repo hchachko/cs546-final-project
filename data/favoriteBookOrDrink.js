@@ -8,7 +8,7 @@ module.exports = {
     if (id === undefined) {
       throw "must provide a valid id.";
     }
-    if (typeof id != "string" || id.trim().length === 0) {
+    if (typeof user_id != "string" || user_id.trim().length === 0) {
       throw "must provide a valid id.";
     }
     if (!ObjectId.isValid(id)) {
@@ -16,7 +16,7 @@ module.exports = {
     }
     const favoriteBooksOrDrinksCollection = await favoriteBooksOrDrinks();
     const booksNdrinks = await favoriteBooksOrDrinksCollection.findOne({
-      _id: ObjectId(id),
+      userId: ObjectId(id),
     });
     if (!booksNdrinks) {
       throw "Could not find collection with id of " + id;
@@ -36,6 +36,7 @@ module.exports = {
     }
     const drink_id = favoriteDrinks.drink_id;
     const drink_name = favoriteDrinks.drink_name;
+    const drink_image = favoriteDrinks.drink_image;
 
     if (drink_id === undefined || drink_name === undefined) {
       throw "must provide a valid book id/name.";
@@ -59,13 +60,79 @@ module.exports = {
     if (!booksNdrinks) {
       throw "Could not find collection with id of " + id;
     }
-
+    for (let i = 0; i < booksNdrinks.favoriteDrinks.length; i++) {
+      if (booksNdrinks.favoriteDrinks[i].drink_id === drink_id) {
+        throw "Drink already exists in favorites.";
+      }
+    }
     await favoriteBooksOrDrinksCollection.updateOne(
       { userId: id },
       {
-        $push: { favoriteDrinks: { book_id: drink_id, book_name: drink_name } },
+        $push: {
+          favoriteDrinks: {
+            drink_id: drink_id,
+            drink_name: drink_name,
+            drink_image: drink_image,
+          },
+        },
       }
     );
     return { addedToDrinks: true };
+  },
+  addToBooks: async (user_id, favoriteBooks) => {
+    const id = ObjectId(user_id);
+    if (id === undefined) {
+      throw "Must provide a valid id.";
+    }
+    if (typeof user_id != "string" || user_id.trim().length === 0) {
+      throw "must provide a valid id.";
+    }
+    if (!ObjectId.isValid(id)) {
+      throw "ID is not a valid Object ID";
+    }
+    const book_id = favoriteBooks.book_id;
+    const book_name = favoriteBooks.book_name;
+    const book_image = favoriteBooks.book_image;
+
+    if (book_id === undefined || book_name === undefined) {
+      throw "must provide a valid book id/name.";
+    }
+    if (
+      typeof book_id != "string" ||
+      book_id.trim().length === 0 ||
+      typeof book_name != "string" ||
+      book_name.trim().length === 0
+    ) {
+      throw "must provide a valid book id/name.";
+    }
+    if (!ObjectId.isValid(book_id)) {
+      throw "ID is not a valid Object ID";
+    }
+
+    const favoriteBooksOrDrinksCollection = await favoriteBooksOrDrinks();
+    const booksNdrinks = await favoriteBooksOrDrinksCollection.findOne({
+      userId: id,
+    });
+    if (!booksNdrinks) {
+      throw "Could not find collection with id of " + id;
+    }
+    for (let i = 0; i < booksNdrinks.favoriteBooks.length; i++) {
+      if (booksNdrinks.favoriteBooks[i].book_id === book_id) {
+        throw "Book already exists in favorites.";
+      }
+    }
+    await favoriteBooksOrDrinksCollection.updateOne(
+      { userId: id },
+      {
+        $push: {
+          favoriteBooks: {
+            book_id: book_id,
+            book_name: book_name,
+            book_image: book_image,
+          },
+        },
+      }
+    );
+    return { addedToBooks: true };
   },
 };

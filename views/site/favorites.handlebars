@@ -1,0 +1,34 @@
+{{#if employee}}
+    <a href="/employeeProfile">Back to Profile</a>
+{{else}}
+    <a href="/userProfile">Back to Profile</a>
+{{/if}}
+
+
+<h2>Favorites</h2>
+
+<h3>Drinks</h3>
+
+<div class="menuComponent">
+    {{#each favoriteDrinks}}
+    <a class="menuItem" href="/menu/{{this.drink_id}}">
+        <img alt="{{this.drink_name}}" src="{{this.drink_image}}">
+        <h3>{{this.drink_name}}</h3>
+    </a>
+    {{/each}}
+</div>
+
+
+
+<h3>Books</h3>
+
+<div class="catalogComponent">
+    {{#each favoriteBooks}}
+    <a class="book" href="/catalog/{{this.book_id}}">
+        <img alt="{{this.book_name}}" src="{{this.book_image}}">
+        <h3>{{this.book_name}}</h3>
+    </a>
+
+    
+    {{/each}}
+</div>
