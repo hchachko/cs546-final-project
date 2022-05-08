@@ -269,3 +269,12 @@ img {
   margin-left: 45px;
   margin-bottom: 55px;
 }
+
+.orderComponent{
+  background-color: #3b555d;
+  margin-top: 35px;
+  padding: 15px 15px;
+  border-radius: 10px;
+  box-shadow: 5px 10px 15px #0000001c;
+  max-width: 40%;
+}

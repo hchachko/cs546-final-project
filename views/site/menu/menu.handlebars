@@ -20,12 +20,13 @@
         <h3>{{this.itemName}}</h3>
         <p>{{this.price}}</p>
         <form method="POST" action="/menu/addFavDrink" id="addFavDrinkForm">
-            <input type="hidden" name="itemId" value="{{this._id}}">
-            <input type="hidden" name="category" value="{{this.category}}">
-            <input type="hidden" name="itemName" value="{{this.itemName}}">
-            <input type="hidden" name="image" value="{{this.image}}">
+            <input type="hidden" id="itemId" name="itemId" value="{{this._id}}">
+            <input type="hidden" id="category" name="category" value="{{this.category}}">
+            <input type="hidden" id="itemName" name="itemName" value="{{this.itemName}}">
+            <input type="hidden" id="image" name="image" value="{{this.image}}">
             <button type="submit">♡ Add to Favorites</button>
         </form>
     </a>
+    <div id="Error" class="Error" hidden> Error</div>
     {{/each}}
 </div>

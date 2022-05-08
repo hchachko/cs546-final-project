@@ -72,22 +72,22 @@ router.post("/signup", async (req, res) => {
     ) {
       throw "first name/last name/email/password must not be empty";
     }
-    // for (let i = 0; i < firstName.length; i++) {
-    //     if (
-    //       !(firstName.charAt(i) > 64 && firstName.charAt(i) < 91) &&
-    //       !(firstName.charAt(i) > 96 && firstName.charAt(i) < 123)
-    //     ) {
-    //       throw "you must provide a valid first name";
-    //     }
-    // }
-    //   for (let i = 0; i < lastName.length; i++) {
-    //     if (
-    //       !(lastName.charAt(i) > 64 && lastName.charAt(i) < 91) &&
-    //       !(lastName.charAt(i) > 96 && lastName.charAt(i) < 123)
-    //     ) {
-    //       throw "you must provide a valid last name";
-    //     }
-    // }
+    for (let i = 0; i < firstName.length; i++) {
+      if (
+        !(firstName.charCodeAt(i) > 64 && firstName.charCodeAt(i) < 91) &&
+        !(firstName.charCodeAt(i) > 96 && firstName.charCodeAt(i) < 123)
+      ) {
+        throw "you must provide a valid first name";
+      }
+    }
+    for (let i = 0; i < lastName.length; i++) {
+      if (
+        !(lastName.charCodeAt(i) > 64 && lastName.charCodeAt(i) < 91) &&
+        !(lastName.charCodeAt(i) > 96 && lastName.charCodeAt(i) < 123)
+      ) {
+        throw "you must provide a valid last name";
+      }
+    }
     if (firstName.length < 1 || lastName.length < 1) {
       throw "first name/last name must be 1 character long or more";
     }

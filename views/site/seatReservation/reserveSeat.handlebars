@@ -1,3 +1,9 @@
+{{#if employee}}
+<a href="/employeeProfile">❮ Back to Employee Profile</a>
+{{else}}
+<a href="/userProfile">❮ Back to User Profile</a>
+{{/if}}
+
 <form method="POST" action="/seats/reserveSeat" id="reserveSeat">
     {{#if success}}
     <div class="Success"> {{success}} </div>
@@ -5,7 +11,7 @@
     {{#if error}}
     <div class="Error"> ERROR: {{error}}</div>
     {{/if}}
-
+    <div id="Error" class="Error" hidden> Error</div>
     <h2>Reserve a Seat</h2>
     <label id="dayLabel" for="day">
         Choose the day:
@@ -97,5 +103,3 @@
     </div>
     {{/each}}
 </div>
-
-<a href="/orderDrink">Go to order drink page</a>
