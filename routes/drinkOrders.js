@@ -4,12 +4,17 @@ const drinkOrderData = require("../data/products/CartItem");
 let { ObjectId } = require("mongodb");
 
 router.get("/", async (req, res) => {
+
   if (req.session.user) {
     try {
-      const drinkOrders = await drinkOrderData.getAll();
+      let id = req.session.user.userId;
+      if (typeof id != "string") throw "id must be a string";
+      const drinkOrders = await drinkOrderData.get(id);
+      const allDrinks = await drinkOrderData.getAll();
+
       if (req.session.user.employee == "on") {
         res.render("site/drinkOrder", {
-          drinkOrders: drinkOrders,
+          drinkOrders: allDrinks,
           employee: req.session.user.employee,
         });
       } else {
