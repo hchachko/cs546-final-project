@@ -1,0 +1,14 @@
+<h1> All Orders</h3>
+
+    {{#each drinkOrders}}
+    <div class="orderComponent">
+        <h3>User Id: {{this.userId}}</h3>
+        <br>
+        <h3>Menu Item: {{this.itemId}}</h3>
+        <br>
+        <p>Requested Pick Up Time: {{this.time}}</p>
+        <br>
+        <p>Notes: {{this.note}}</p>
+
+      </div>
+    {{/each}}
