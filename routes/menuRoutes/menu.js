@@ -257,7 +257,7 @@ router.get("/:id", async (req, res) => {
       if (!ObjectId.isValid(id)) throw "id is not a valid Object ID";
       const menuItem = await menuData.get(id);
       res.render("site/menu/menuItem", {
-        userId: req.session.user.firstName,
+        userId: req.session.user.userId,
         menuItem: menuItem,
       });
     } catch (e) {

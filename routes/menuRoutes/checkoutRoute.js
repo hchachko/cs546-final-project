@@ -10,6 +10,8 @@ router.post("/addToCart", async (req, res) => {
     const itemId = req.body.itemId;
     const note = req.body.note;
     const time = req.body.time;
+    const hour = time[0]+time[1];
+    const min = time[3]+time[4];
     const userId = req.body.userId;
     const currentTime = new Date();
     if (
@@ -36,8 +38,12 @@ router.post("/addToCart", async (req, res) => {
     ) {
       throw "Input(s) must not be empty, besides notes";
     }
-    if (currentTime.getHours() <= parseInt(time[0])){
-      if(currentTime.getMinutes() > parseInt(time[1])){
+    //Make sure time is after "now"
+    if (currentTime.getHours() >= parseInt(hour)){
+      throw "Time is too early"
+  }
+    if (currentTime.getHours() >= parseInt(hour)){
+      if(currentTime.getMinutes() > parseInt(min)){
       throw "Time is too early"
     }
   }
