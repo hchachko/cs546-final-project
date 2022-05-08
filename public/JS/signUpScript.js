@@ -16,8 +16,8 @@
             if (firstNameValue.length == 0) throw 'you must provide a valid first name';
             for (let i = 0; i < firstNameValue.length; i++) {
                 if (
-                  !(firstNameValue.charAt(i) > 64 && firstNameValue.charAt(i) < 91) &&
-                  !(firstNameValue.charAt(i) > 96 && firstNameValue.charAt(i) < 123)
+                  !(firstNameValue.charCodeAt(i) > 64 && firstNameValue.charCodeAt(i) < 91) &&
+                  !(firstNameValue.charCodeAt(i) > 96 && firstNameValue.charCodeAt(i) < 123)
                 ) {
                   throw "you must provide a valid first name";
                 }
@@ -30,8 +30,8 @@
             if (lastNameValue.length == 0) throw 'you must provide a valid last name';
             for (let i = 0; i < lastNameValue.length; i++) {
                 if (
-                  !(lastNameValue.charAt(i) > 64 && lastNameValue.charAt(i) < 91) &&
-                  !(lastNameValue.charAt(i) > 96 && lastNameValue.charAt(i) < 123)
+                  !(lastNameValue.charCodeAt(i) > 64 && lastNameValue.charCodeAt(i) < 91) &&
+                  !(lastNameValue.charCodeAt(i) > 96 && lastNameValue.charCodeAt(i) < 123)
                 ) {
                   throw "last name must be valid";
                 }

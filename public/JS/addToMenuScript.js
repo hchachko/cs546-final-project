@@ -18,7 +18,7 @@
             let priceValue = priceElement.value;
             if (typeof priceValue !== 'string') throw 'you must provide a price';
             priceValue = priceValue.trim();
-            if (price.length == 0) throw 'you must provide a valid price';
+            if (priceValue.length == 0) throw 'you must provide a valid price';
             //Image checking
             if (!imageElement.value) throw 'you must provide an image link';
             let imageValue = imageElement.value;

@@ -1,37 +1,37 @@
 {{#if posted}}
-<h4>Comment posted successfully!</h4>
-<a href="/menu">Go back to menu</a>
+    <h4>Comment posted successfully!</h4>
+    <a href="/menu">Go back to menu</a>
 {{else}}
-<a href="/menu">Cancel Comment and go back to menu</a>
-<div class="review-comment-page">
+    <a href="/menu">Cancel Comment and go back to menu</a>
+    <div class="review-comment-page">
 
-    <h4>Review Posted by {{review.Reviewer_name}}:</h4>
-    <dl>
-        <dt>Their Rating:</dt>
-        <dd>{{review.Rating}}/5 stars</dt>
-        <dt>Their Review:</dt>
-        <dd>{{review.Summary}}</dd>
-    </dl>
-</div>
-<form method="POST" action="/productReviewsComments/{{review._id}}" id="comment-form">
+        <h4>Review Posted by {{review.Reviewer_name}}:</h4>
+        <dl>
+            <dt>Their Rating:</dt>
+            <dd>{{review.Rating}}/5 stars</dt>
+            <dt>Their Review:</dt>
+            <dd>{{review.Summary}}</dd>
+        </dl>
+    </div>
+    <form method="POST" action="/productReviewsComments/{{review._id}}" id="comment-form">
+        <label id="helpfulReview_label" for="helpfulReview">
+            Did you find this review helpful?
+            <select name="helpfulReview" id="helpfulReview">
+                <option value="helpful">Yes</option>
+                <option value="unhelpful">No</option>
+            </select>
+        </label>
+
+        <label id="comment_label" for="comment">
+            Comment Here:
+            <br>
+            <textarea name="comment" id="comment"></textarea>
+        </label>
+
+        <button type="submit">Post</button>
+    </form>
     {{#if error}}
-    <div class="Error"> ERROR: {{error}}</div>
+        <div class="Error"> ERROR: {{error}}</div>
     {{/if}}
-    <label id="helpfulReveiw_label" for="helpfulReview">
-        Did you find this review helpful?
-        <select name="helpfulReview" id="helpfulReview">
-            <option value="helpful">Yes</option>
-            <option value="unhelpful">No</option>
-        </select>
-    </label>
-
-    <label id="comment_label" for="comment">
-        Comment Here:
-        <br>
-        <textarea name="comment" id="comment"></textarea>
-    </label>
-
-    <button type="submit">Post</button>
-</form>
-
+    <div id="Error" class="Error" hidden> Error</div>
 {{/if}}
