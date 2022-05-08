@@ -152,7 +152,7 @@ router.get("/:id", async (req, res) => {
       if (id.length == 0) throw "id is an empty string"
       if (!ObjectId.isValid(id)) throw "id is not a valid Object ID";
       const menuItem = await menuData.get(id);
-      res.render("site/menu/menuItem", { menuItem: menuItem });
+      res.render("site/menu/menuItem", { userId:req.session.user.firstName, menuItem: menuItem });
     } catch (e) {
       res.status(400).render("site/homepage", { error: e });
     }

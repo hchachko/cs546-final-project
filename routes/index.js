@@ -1,5 +1,6 @@
 const userRoutes = require("./users");
 const menuRoutes = require("./menuRoutes/menu");
+const checkoutRoutes = require("./menuRoutes/checkoutRoute");
 const productReviewsRoutes = require("./menuRoutes/productReviews");
 const productReviewsCommentsRoutes = require("./menuRoutes/productReviewsComments");
 const catalogRoutes = require("./catalogRoutes/catalog");
@@ -8,6 +9,7 @@ const bookReviewsCommentsRoutes = require("./catalogRoutes/bookReviewsComments")
 const seatRoutes = require("./seats");
 const constructorMethod = (app) => {
   app.use("/menu", menuRoutes);
+  app.use("/checkout", checkoutRoutes);
   app.use("/productReviews", productReviewsRoutes);
   app.use("/productReviewsComments", productReviewsCommentsRoutes);
   app.use("/catalog", catalogRoutes);
