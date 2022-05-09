@@ -16,12 +16,13 @@
 <br>
 <div class="catalogComponent">
     {{#each catalog}}
-    <a class="book" href="/catalog/{{this._id}}">
+    <div class="book">
+    <a href="/catalog/{{this._id}}">
         <img alt="{{this.bookName}}" src="{{this.image}}">
         <h3>{{this.bookName}}</h3>
         <p>Number of copies avaliable: {{this.numCopies}}</p>
-
-        <div id="new-content">
+    </a>
+    <div id="new-content">
             <form method="POST" action="/menu/addFavBook" id="addFavBookForm">
                 <input type="hidden" name="itemId" value="{{this._id}}">
                 <input type="hidden" name="genre" value="{{this.genre}}">
@@ -30,7 +31,7 @@
                 <button type="submit">♡ Add to Favorites</button>
             </form>
         </div>
-    </a>
+    </div>
     <div id="Error" class="Error" hidden> Error</div> 
     {{/each}}
 </div>

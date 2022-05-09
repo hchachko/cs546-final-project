@@ -1,16 +1,14 @@
 <!-- Still a work in progress (Harrison) -->
 <a href="/catalog">Back to Book Catalog</a>
 <h2>{{book.bookName}}</h2>
-<dt>
-    <h4>Likes: {{book.likes}} Dislikes: {{book.dislikes}}</h4>
-</dt>
+<h4>Likes: {{book.likes}} Dislikes: {{book.dislikes}}</h4>
 <img alt="{{book.bookName}}" src="{{book.image}}">
 <dl>
     <dt>
-        <h3>Number of copies avaliable: {{book.numCopies}}</h3>
+        <p>Number of copies avaliable: {{book.numCopies}}</p>
     </dt>
     <dt>
-        <h3>Reviews:</h3>
+        <p>Reviews:</p>
     </dt>
     <dd>
         {{#if book.reviews}}
@@ -22,21 +20,22 @@
                 <dd>{{this.Reviewer_name}} wrote: {{this.Summary}}</dd>
 
                 {{#if this.Comments}}
-                <div class="commentsComponent">
+                
                     <dd>Comments:</dd>
                     <dd>
+                        <div class="commentsComponent">
                         <dl>
                             {{#each this.Comments}}
                             <div class="comments">
-                                <dd>{{this.Commenter_name}} found this review {{this.Helpful_Review}}! Their comment:
+                                <dt>{{this.Commenter_name}} found this review {{this.Helpful_Review}}!</dt> <dd>Their comment:
                                     {{this.Comment_data}}</dd>
                             </div>
                             {{/each}}
                         </dl>
+                        </div>
                     </dd>
                     {{/if}}
                     <dd><a href="/bookReviewsComments/{{this._id}}">Would you like to comment?</a></dd>
-                </div>
             </div>
             {{/each}}
         </dl>

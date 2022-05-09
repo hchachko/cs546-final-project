@@ -15,18 +15,20 @@
 <a href="/menu/mostDisliked"><p>Sort by most disliked</p></a>
 <div class="menuComponent">
     {{#each menu}}
-    <a class="menuItem" href="/menu/{{this._id}}">
+    <div class="menuItem">
+    <a href="/menu/{{this._id}}">
         <img alt="{{this.itemName}}" src="{{this.image}}">
         <h3>{{this.itemName}}</h3>
         <p>{{this.price}}</p>
-        <form method="POST" action="/menu/addFavDrink" id="addFavDrinkForm">
+    </a>
+    <form method="POST" action="/menu/addFavDrink" id="addFavDrinkForm">
             <input type="hidden" id="itemId" name="itemId" value="{{this._id}}">
             <input type="hidden" id="category" name="category" value="{{this.category}}">
             <input type="hidden" id="itemName" name="itemName" value="{{this.itemName}}">
             <input type="hidden" id="image" name="image" value="{{this.image}}">
             <button type="submit">♡ Add to Favorites</button>
         </form>
-    </a>
+        </div>
     <div id="Error" class="Error" hidden> Error</div>
     {{/each}}
 </div>
